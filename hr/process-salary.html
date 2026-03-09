@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Process Salary - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/payroll.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="employees.html">All Employees</a></li>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="active"><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Process Salary</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search employees...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Salary processing deadline approaching</p>
+                                        <span class="notification-time">2 days remaining</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Process Salary Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Process Salary</span>
+                </nav>
+                
+                <!-- Alert Message (Hidden by default) -->
+                <div class="alert alert-success" id="salaryAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="alertMessage"></span>
+                    <button type="button" class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Salary Processing Header -->
+                <div class="salary-processing-header">
+                    <div class="processing-month-selector">
+                        <button class="month-nav-btn" onclick="changeMonth(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="current-month-display">
+                            <h2 id="displayMonth">January 2026</h2>
+                            <p>Salary Processing</p>
+                        </div>
+                        <button class="month-nav-btn" onclick="changeMonth(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="processing-status">
+                        <div class="status-indicator pending">
+                            <i class="fas fa-clock"></i>
+                            <span>Not Processed</span>
+                        </div>
+                        <span class="deadline-info">Deadline: Feb 25, 2026</span>
+                    </div>
+                </div>
+                
+                <!-- Payroll Summary -->
+                <div class="payroll-summary-grid">
+                    <div class="payroll-summary-card total">
+                        <div class="summary-card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="summary-card-info">
+                            <span class="summary-card-value" id="totalEmployees">248</span>
+                            <span class="summary-card-label">Total Employees</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payroll-summary-card gross">
+                        <div class="summary-card-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="summary-card-info">
+                            <span class="summary-card-value" id="totalGross">₹1,36,40,000</span>
+                            <span class="summary-card-label">Total Gross Salary</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payroll-summary-card deductions">
+                        <div class="summary-card-icon">
+                            <i class="fas fa-minus-circle"></i>
+                        </div>
+                        <div class="summary-card-info">
+                            <span class="summary-card-value" id="totalDeductions">₹24,80,000</span>
+                            <span class="summary-card-label">Total Deductions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payroll-summary-card net">
+                        <div class="summary-card-icon">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="summary-card-info">
+                            <span class="summary-card-value highlight" id="totalNet">₹1,11,60,000</span>
+                            <span class="summary-card-label">Total Net Payable</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payroll Processing Steps -->
+                <div class="payroll-steps">
+                    <div class="step-item completed">
+                        <div class="step-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Attendance Verified</h4>
+                            <p>All attendance records reviewed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item completed">
+                        <div class="step-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Leave Adjustments</h4>
+                            <p>Leave deductions calculated</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item active">
+                        <div class="step-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Calculate Salary</h4>
+                            <p>Review and process salaries</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Generate Payslips</h4>
+                            <p>Create salary slips for employees</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filters -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="salary-filters">
+                            <div class="filter-group">
+                                <label for="deptFilterSalary" class="filter-label">Department:</label>
+                                <select id="deptFilterSalary" class="filter-select" onchange="filterSalaries()">
+                                    <option value="all">All Departments</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="operations">Operations</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="searchSalary" class="filter-label">Search:</label>
+                                <input 
+                                    type="text" 
+                                    id="searchSalary" 
+                                    class="filter-input" 
+                                    placeholder="Employee name or ID..."
+                                    onkeyup="filterSalaries()"
+                                >
+                            </div>
+                            
+                            <button class="btn btn-secondary" onclick="resetSalaryFilters()">
+                                <i class="fas fa-redo"></i>
+                                Reset
+                            </button>
+                            
+                            <div class="ml-auto">
+                                <button class="btn btn-secondary" onclick="calculateAll()">
+                                    <i class="fas fa-calculator"></i>
+                                    Calculate All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salary Processing Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-list"></i>
+                            Employee Salary Details
+                        </h3>
+                        <div class="card-actions">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="selectAllSalary" onchange="toggleSelectAllSalary()">
+                                <span>Select All</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table salary-processing-table" id="salaryTable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAllHeader" onchange="toggleSelectAllSalary()">
+                                        </th>
+                                        <th>Employee</th>
+                                        <th>Employee ID</th>
+                                        <th>Department</th>
+                                        <th>Days Worked</th>
+                                        <th>Gross Salary</th>
+                                        <th>Deductions</th>
+                                        <th>Net Salary</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="salaryTableBody">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bulk Actions Bar -->
+                <div class="bulk-actions-bar" id="bulkActionsSalary" style="display: none;">
+                    <div class="selected-count">
+                        <span id="selectedSalaryCount">0</span> employees selected
+                    </div>
+                    <div class="bulk-action-buttons">
+                        <button class="btn btn-primary" onclick="bulkCalculateSalary()">
+                            <i class="fas fa-calculator"></i>
+                            Calculate Selected
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearSalarySelection()">
+                            <i class="fas fa-times-circle"></i>
+                            Clear Selection
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Process Actions -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="process-salary-actions">
+                            <div class="action-info">
+                                <i class="fas fa-info-circle"></i>
+                                <p>Review all salary calculations before processing. Once processed, payslips will be generated and sent to employees.</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-secondary btn-lg" onclick="saveDraft()">
+                                    <i class="fas fa-save"></i>
+                                    Save Draft
+                                </button>
+                                <button class="btn btn-success btn-lg" onclick="processSalaries()">
+                                    <i class="fas fa-check-double"></i>
+                                    Process & Generate Payslips
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payroll Analytics -->
+                <div class="payroll-analytics-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>
+                                <i class="fas fa-chart-pie"></i>
+                                Department-wise Payroll
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="departmentPayrollChart" height="250"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>
+                                <i class="fas fa-chart-bar"></i>
+                                Salary Distribution
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="salaryDistributionChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- Salary Details Modal -->
+    <div class="modal" id="salaryDetailsModal">
+        <div class="modal-overlay" onclick="closeSalaryModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Salary Breakdown
+                </h3>
+                <button class="modal-close" onclick="closeSalaryModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="salary-breakdown-content">
+                    <!-- Employee Info -->
+                    <div class="breakdown-section">
+                        <h4>Employee Information</h4>
+                        <div class="info-grid-modal">
+                            <div class="info-item-modal">
+                                <span class="info-label-modal">Name:</span>
+                                <span class="info-value-modal" id="modalEmpName">-</span>
+                            </div>
+                            <div class="info-item-modal">
+                                <span class="info-label-modal">Employee ID:</span>
+                                <span class="info-value-modal" id="modalEmpId">-</span>
+                            </div>
+                            <div class="info-item-modal">
+                                <span class="info-label-modal">Department:</span>
+                                <span class="info-value-modal" id="modalDept">-</span>
+                            </div>
+                            <div class="info-item-modal">
+                                <span class="info-label-modal">Days Worked:</span>
+                                <span class="info-value-modal" id="modalDays">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Earnings -->
+                    <div class="breakdown-section">
+                        <h4>Earnings</h4>
+                        <div class="breakdown-table-modal">
+                            <div class="breakdown-row-modal">
+                                <span>Basic Salary</span>
+                                <span id="modalBasic">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal">
+                                <span>HRA</span>
+                                <span id="modalHRA">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal">
+                                <span>Special Allowance</span>
+                                <span id="modalSpecial">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal total-row">
+                                <span><strong>Total Earnings</strong></span>
+                                <span><strong id="modalTotalEarnings">₹0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Deductions -->
+                    <div class="breakdown-section">
+                        <h4>Deductions</h4>
+                        <div class="breakdown-table-modal">
+                            <div class="breakdown-row-modal">
+                                <span>Provident Fund</span>
+                                <span id="modalPF">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal">
+                                <span>Professional Tax</span>
+                                <span id="modalPT">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal">
+                                <span>Income Tax (TDS)</span>
+                                <span id="modalTax">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal">
+                                <span>Leave Deduction</span>
+                                <span id="modalLeave">₹0</span>
+                            </div>
+                            <div class="breakdown-row-modal total-row deduction">
+                                <span><strong>Total Deductions</strong></span>
+                                <span><strong id="modalTotalDeductions">₹0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Net Salary -->
+                    <div class="net-salary-display">
+                        <span class="net-label">Net Salary Payable</span>
+                        <span class="net-amount" id="modalNetSalary">₹0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeSalaryModal()">
+                    Close
+                </button>
+                <button class="btn btn-primary" onclick="calculateSalaryForEmployee()">
+                    <i class="fas fa-calculator"></i>
+                    Recalculate
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/process-salary.js"></script>
+    
+</body>
+</html>

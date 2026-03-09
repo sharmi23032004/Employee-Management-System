@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Payslips - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/payroll.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">John Doe</h4>
+                    <span class="user-role">Employee</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="my-profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="apply-leave.html">Apply Leave</a></li>
+                            <li><a href="my-leaves.html">My Leaves</a></li>
+                            <li><a href="leave-balance.html">Leave Balance</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-clock"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-attendance.html">My Attendance</a></li>
+                            <li><a href="attendance-summary.html">Monthly Summary</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="active"><a href="my-payslips.html">My Payslips</a></li>
+                            <li><a href="salary-details.html">Salary Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="change-password.html">
+                            <i class="fas fa-key"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">My Payslips</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">3</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Payslip for January 2026 available</p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">John Doe</h4>
+                                    <p id="userEmailDropdown">john.doe@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <a href="change-password.html" class="dropdown-item">
+                                <i class="fas fa-key"></i>
+                                Change Password
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Payslips Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>My Payslips</span>
+                </nav>
+                
+                <!-- Current Salary Card -->
+                <div class="current-salary-card">
+                    <div class="salary-header">
+                        <div class="salary-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="salary-info">
+                            <h3>Current Monthly Salary</h3>
+                            <p>as of January 2026</p>
+                        </div>
+                    </div>
+                    <div class="salary-amount">
+                        <h2>₹45,000</h2>
+                        <span class="salary-label">Net Pay</span>
+                    </div>
+                    <div class="salary-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Gross Salary</span>
+                            <span class="breakdown-value">₹55,000</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Total Deductions</span>
+                            <span class="breakdown-value">₹10,000</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" onclick="viewLatestPayslip()">
+                        <i class="fas fa-file-invoice"></i>
+                        View Latest Payslip
+                    </button>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="payroll-stats-grid">
+                    <div class="stat-card-payroll">
+                        <div class="stat-icon earnings">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">₹5,40,000</h3>
+                            <p class="stat-label">Total Earnings</p>
+                            <span class="stat-subtitle">Last 12 Months</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card-payroll">
+                        <div class="stat-icon deductions">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">₹1,20,000</h3>
+                            <p class="stat-label">Total Deductions</p>
+                            <span class="stat-subtitle">Last 12 Months</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card-payroll">
+                        <div class="stat-icon netpay">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">₹4,20,000</h3>
+                            <p class="stat-label">Net Pay Received</p>
+                            <span class="stat-subtitle">Last 12 Months</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card-payroll">
+                        <div class="stat-icon tax">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">₹45,000</h3>
+                            <p class="stat-label">Tax Deducted (TDS)</p>
+                            <span class="stat-subtitle">Last 12 Months</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Grid -->
+                <div class="payroll-content-grid">
+                    
+                    <!-- Left Column - Payslips List -->
+                    <div class="payroll-left">
+                        
+                        <!-- Filters -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="payslip-filters">
+                                    <div class="form-group">
+                                        <label for="yearFilter" class="form-label">Year</label>
+                                        <select id="yearFilter" class="form-control" onchange="filterPayslips()">
+                                            <option value="2026">2026</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2024">2024</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <button class="btn btn-secondary" onclick="resetPayslipFilters()">
+                                        <i class="fas fa-redo"></i>
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payslips List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-file-invoice"></i>
+                                    Payslip History
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="payslips-list" id="payslipsList">
+                                    <!-- Will be populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Right Column - Charts & Info -->
+                    <div class="payroll-right">
+                        
+                        <!-- Earnings Chart -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-area"></i>
+                                    Earnings Overview
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="earningsChart" height="250"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Salary Components -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-list-ul"></i>
+                                    Salary Components
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="salary-components-list">
+                                    <div class="component-category">
+                                        <h4>Earnings</h4>
+                                        <div class="component-item">
+                                            <span class="component-label">Basic Salary</span>
+                                            <span class="component-value">₹30,000</span>
+                                        </div>
+                                        <div class="component-item">
+                                            <span class="component-label">HRA</span>
+                                            <span class="component-value">₹15,000</span>
+                                        </div>
+                                        <div class="component-item">
+                                            <span class="component-label">Special Allowance</span>
+                                            <span class="component-value">₹10,000</span>
+                                        </div>
+                                        <div class="component-total">
+                                            <span class="component-label">Gross Salary</span>
+                                            <span class="component-value">₹55,000</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="component-category">
+                                        <h4>Deductions</h4>
+                                        <div class="component-item">
+                                            <span class="component-label">Provident Fund</span>
+                                            <span class="component-value">₹3,600</span>
+                                        </div>
+                                        <div class="component-item">
+                                            <span class="component-label">Professional Tax</span>
+                                            <span class="component-value">₹200</span>
+                                        </div>
+                                        <div class="component-item">
+                                            <span class="component-label">Income Tax (TDS)</span>
+                                            <span class="component-value">₹6,200</span>
+                                        </div>
+                                        <div class="component-total deduction">
+                                            <span class="component-label">Total Deductions</span>
+                                            <span class="component-value">₹10,000</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="net-salary">
+                                        <span class="component-label">Net Salary</span>
+                                        <span class="component-value">₹45,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tax Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-receipt"></i>
+                                    Tax Information
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tax-info-list">
+                                    <div class="tax-info-item">
+                                        <span class="tax-label">PAN Number</span>
+                                        <span class="tax-value">ABCDE1234F</span>
+                                    </div>
+                                    <div class="tax-info-item">
+                                        <span class="tax-label">TDS Deducted (YTD)</span>
+                                        <span class="tax-value">₹6,200</span>
+                                    </div>
+                                    <div class="tax-info-item">
+                                        <span class="tax-label">Form 16 Status</span>
+                                        <span class="tax-value">
+                                            <span class="status-badge pending">Not Available</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-block mt-3" onclick="downloadForm16()">
+                                    <i class="fas fa-download"></i>
+                                    Download Form 16
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- Payslip Details Modal -->
+    <div class="modal" id="payslipDetailsModal">
+        <div class="modal-overlay" onclick="closePayslipModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Payslip Details
+                </h3>
+                <button class="modal-close" onclick="closePayslipModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Payslip Preview -->
+                <div class="payslip-preview">
+                    <div class="payslip-header-section">
+                        <div class="company-info">
+                            <h2>TechCorp Solutions Pvt. Ltd.</h2>
+                            <p>123 Business Park, Tech City, Chennai - 600001</p>
+                            <p>Email: hr@techcorp.com | Phone: +91 44 1234 5678</p>
+                        </div>
+                        <div class="payslip-title">
+                            <h3>SALARY SLIP</h3>
+                            <p id="modalPayPeriod">For the month of January 2026</p>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-info-section">
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Employee Name:</span>
+                                <span class="info-value">John Doe</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Employee ID:</span>
+                                <span class="info-value">EMP-2024</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Designation:</span>
+                                <span class="info-value">Senior Software Developer</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Department:</span>
+                                <span class="info-value">Engineering</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Date of Joining:</span>
+                                <span class="info-value">Dec 15, 2019</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Bank Account:</span>
+                                <span class="info-value">XXXXXXXXXXXX4567</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="salary-details-section">
+                        <table class="payslip-table">
+                            <thead>
+                                <tr>
+                                    <th>Earnings</th>
+                                    <th class="text-right">Amount (₹)</th>
+                                    <th>Deductions</th>
+                                    <th class="text-right">Amount (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Basic Salary</td>
+                                    <td class="text-right">30,000.00</td>
+                                    <td>Provident Fund</td>
+                                    <td class="text-right">3,600.00</td>
+                                </tr>
+                                <tr>
+                                    <td>House Rent Allowance</td>
+                                    <td class="text-right">15,000.00</td>
+                                    <td>Professional Tax</td>
+                                    <td class="text-right">200.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Special Allowance</td>
+                                    <td class="text-right">10,000.00</td>
+                                    <td>Income Tax (TDS)</td>
+                                    <td class="text-right">6,200.00</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td><strong>Total Earnings</strong></td>
+                                    <td class="text-right"><strong>55,000.00</strong></td>
+                                    <td><strong>Total Deductions</strong></td>
+                                    <td class="text-right"><strong>10,000.00</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="net-pay-section">
+                        <div class="net-pay-label">NET PAY</div>
+                        <div class="net-pay-amount">₹45,000.00</div>
+                        <div class="net-pay-words">Forty Five Thousand Rupees Only</div>
+                    </div>
+                    
+                    <div class="payslip-footer-section">
+                        <p><strong>Note:</strong> This is a computer-generated payslip and does not require a signature.</p>
+                        <p class="generated-date">Generated on: <span id="generatedDate">Feb 09, 2026</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closePayslipModal()">
+                    Close
+                </button>
+                <button class="btn btn-primary" onclick="downloadCurrentPayslip()">
+                    <i class="fas fa-download"></i>
+                    Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/employee/my-payslips.js"></script>
+    
+</body>
+</html>

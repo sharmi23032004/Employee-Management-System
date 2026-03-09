@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mark Attendance - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/attendance.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="employees.html">All Employees</a></li>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="active"><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Mark Attendance</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search employees...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">5 pending leave requests</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Mark Attendance Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Mark Attendance</span>
+                </nav>
+                
+                <!-- Alert Message (Hidden by default) -->
+                <div class="alert alert-success" id="attendanceAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="alertMessage"></span>
+                    <button type="button" class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Attendance Date Header -->
+                <div class="attendance-date-header">
+                    <div class="date-selector">
+                        <button class="date-nav-btn" onclick="changeDate(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="current-date-display">
+                            <h2 id="displayDate">Monday, February 16, 2026</h2>
+                            <input type="date" id="attendanceDate" class="date-input" onchange="loadAttendanceByDate()">
+                        </div>
+                        <button class="date-nav-btn" onclick="changeDate(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="date-actions">
+                        <button class="btn btn-secondary" onclick="setToday()">
+                            <i class="fas fa-calendar-day"></i>
+                            Today
+                        </button>
+                        <button class="btn btn-primary" onclick="bulkMarkAttendance()">
+                            <i class="fas fa-check-double"></i>
+                            Mark All Present
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Attendance Summary Stats -->
+                <div class="attendance-summary-cards">
+                    <div class="summary-stat-card total">
+                        <div class="stat-icon-circle">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalEmployees">248</span>
+                            <span class="stat-label">Total Employees</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-stat-card present">
+                        <div class="stat-icon-circle">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="presentCount">0</span>
+                            <span class="stat-label">Present</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-stat-card absent">
+                        <div class="stat-icon-circle">
+                            <i class="fas fa-user-times"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="absentCount">0</span>
+                            <span class="stat-label">Absent</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-stat-card leave">
+                        <div class="stat-icon-circle">
+                            <i class="fas fa-umbrella-beach"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="leaveCount">4</span>
+                            <span class="stat-label">On Leave</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-stat-card pending">
+                        <div class="stat-icon-circle">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="pendingCount">248</span>
+                            <span class="stat-label">Not Marked</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filters -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="attendance-filters">
+                            <div class="filter-group">
+                                <label for="deptFilter" class="filter-label">Department:</label>
+                                <select id="deptFilter" class="filter-select" onchange="filterAttendance()">
+                                    <option value="all">All Departments</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="operations">Operations</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="statusAttFilter" class="filter-label">Status:</label>
+                                <select id="statusAttFilter" class="filter-select" onchange="filterAttendance()">
+                                    <option value="all">All Status</option>
+                                    <option value="present">Present</option>
+                                    <option value="absent">Absent</option>
+                                    <option value="leave">On Leave</option>
+                                    <option value="pending">Not Marked</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="searchEmployee" class="filter-label">Search:</label>
+                                <input 
+                                    type="text" 
+                                    id="searchEmployee" 
+                                    class="filter-input" 
+                                    placeholder="Name or ID..."
+                                    onkeyup="filterAttendance()"
+                                >
+                            </div>
+                            
+                            <button class="btn btn-secondary" onclick="resetFilters()">
+                                <i class="fas fa-redo"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Attendance Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-list-check"></i>
+                            Employee Attendance
+                        </h3>
+                        <div class="bulk-actions">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="selectAllEmployees" onchange="toggleSelectAll()">
+                                <span>Select All</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table attendance-marking-table" id="attendanceTable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAllHeader" onchange="toggleSelectAll()">
+                                        </th>
+                                        <th>Employee</th>
+                                        <th>Employee ID</th>
+                                        <th>Department</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendanceTableBody">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <i class="fas fa-users-slash"></i>
+                            <h3>No Employees Found</h3>
+                            <p>Try adjusting your filters or search criteria.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bulk Actions Bar -->
+                <div class="bulk-actions-bar" id="bulkActionsBar" style="display: none;">
+                    <div class="selected-count">
+                        <span id="selectedCount">0</span> employees selected
+                    </div>
+                    <div class="bulk-action-buttons">
+                        <button class="btn btn-success" onclick="bulkMarkStatus('present')">
+                            <i class="fas fa-check"></i>
+                            Mark Present
+                        </button>
+                        <button class="btn btn-danger" onclick="bulkMarkStatus('absent')">
+                            <i class="fas fa-times"></i>
+                            Mark Absent
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearSelection()">
+                            <i class="fas fa-times-circle"></i>
+                            Clear Selection
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Save Actions -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="save-actions">
+                            <button class="btn btn-secondary btn-lg" onclick="cancelAttendance()">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </button>
+                            <button class="btn btn-primary btn-lg" onclick="saveAttendance()">
+                                <i class="fas fa-save"></i>
+                                Save Attendance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- Mark Attendance Modal -->
+    <div class="modal" id="markAttendanceModal">
+        <div class="modal-overlay" onclick="closeMarkModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-calendar-check"></i>
+                    Mark Attendance
+                </h3>
+                <button class="modal-close" onclick="closeMarkModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="employee-attendance-info">
+                    <div class="employee-info-row">
+                        <span class="info-label">Employee:</span>
+                        <span class="info-value" id="modalEmployeeName">-</span>
+                    </div>
+                    <div class="employee-info-row">
+                        <span class="info-label">Employee ID:</span>
+                        <span class="info-value" id="modalEmployeeId">-</span>
+                    </div>
+                    <div class="employee-info-row">
+                        <span class="info-label">Department:</span>
+                        <span class="info-value" id="modalEmployeeDept">-</span>
+                    </div>
+                    <div class="employee-info-row">
+                        <span class="info-label">Date:</span>
+                        <span class="info-value" id="modalDate">-</span>
+                    </div>
+                </div>
+                
+                <form id="attendanceMarkForm" class="attendance-mark-form">
+                    <div class="form-group">
+                        <label class="form-label">Status <span class="required">*</span></label>
+                        <div class="status-options">
+                            <label class="status-option">
+                                <input type="radio" name="attendanceStatus" value="present" required>
+                                <span class="status-card present">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Present</span>
+                                </span>
+                            </label>
+                            <label class="status-option">
+                                <input type="radio" name="attendanceStatus" value="absent">
+                                <span class="status-card absent">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>Absent</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkInTime" class="form-label">Check In Time</label>
+                            <input 
+                                type="time" 
+                                id="checkInTime" 
+                                name="checkInTime" 
+                                class="form-control"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="checkOutTime" class="form-label">Check Out Time</label>
+                            <input 
+                                type="time" 
+                                id="checkOutTime" 
+                                name="checkOutTime" 
+                                class="form-control"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="remarks" class="form-label">Remarks</label>
+                        <textarea 
+                            id="remarks" 
+                            name="remarks" 
+                            class="form-control" 
+                            rows="3"
+                            placeholder="Add any notes or remarks (optional)"
+                        ></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeMarkModal()">
+                    Cancel
+                </button>
+                <button class="btn btn-primary" onclick="confirmMarkAttendance()">
+                    <i class="fas fa-check"></i>
+                    Mark Attendance
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/mark-attendance.js"></script>
+    
+</body>
+</html>

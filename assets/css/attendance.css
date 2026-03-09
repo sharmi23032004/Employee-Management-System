@@ -1,0 +1,1421 @@
+/* ================================
+   ATTENDANCE PAGES STYLES
+   ================================ */
+
+/* Current Status Card */
+.current-status-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xl);
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.status-icon {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.status-info h3 {
+    font-size: var(--font-2xl);
+    margin-bottom: 0.5rem;
+}
+
+.status-info p {
+    opacity: 0.9;
+}
+
+.status-center {
+    flex: 1;
+    text-align: center;
+}
+
+.time-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.time-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.time-label {
+    font-size: var(--font-sm);
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.time-value {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
+}
+
+.time-separator {
+    font-size: var(--font-2xl);
+    opacity: 0.6;
+}
+
+.working-hours {
+    font-size: var(--font-lg);
+    opacity: 0.9;
+}
+
+.working-hours i {
+    margin-right: 0.5rem;
+}
+
+.status-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Attendance Stats Grid */
+.attendance-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card-attendance {
+    background-color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all var(--transition-base);
+}
+
+.stat-card-attendance:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.stat-card-attendance .stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: var(--white);
+    flex-shrink: 0;
+}
+
+.stat-icon.present {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.stat-icon.absent {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.stat-icon.average {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+}
+
+.stat-icon.percentage {
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-content .stat-value {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+}
+
+.stat-content .stat-label {
+    color: var(--gray-700);
+    font-size: var(--font-sm);
+    font-weight: var(--font-medium);
+    margin-bottom: 0.25rem;
+}
+
+.stat-subtitle {
+    color: var(--gray-500);
+    font-size: var(--font-xs);
+}
+
+/* Attendance Content Grid */
+.attendance-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Calendar */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.calendar-header h4 {
+    font-size: var(--font-xl);
+    color: var(--gray-900);
+}
+
+.calendar-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.calendar-nav-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-weight: var(--font-semibold);
+    color: var(--gray-600);
+    font-size: var(--font-sm);
+    padding: 0.5rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    background-color: var(--gray-50);
+    color: var(--gray-700);
+}
+
+.calendar-day.other-month {
+    color: var(--gray-400);
+    background-color: transparent;
+}
+
+.calendar-day.today {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: var(--font-bold);
+}
+
+.calendar-day.present {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.calendar-day.absent {
+    background-color: var(--error-light);
+    color: var(--error);
+}
+
+.calendar-day.leave {
+    background-color: var(--warning-light);
+    color: var(--warning);
+}
+
+.calendar-day.holiday {
+    background-color: var(--info-light);
+    color: var(--info);
+}
+
+.calendar-day:hover:not(.other-month) {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+/* Calendar Legend */
+.calendar-legend {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--gray-200);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-xs);
+    color: var(--gray-700);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.legend-dot.present {
+    background-color: var(--success);
+}
+
+.legend-dot.absent {
+    background-color: var(--error);
+}
+
+.legend-dot.leave {
+    background-color: var(--warning);
+}
+
+.legend-dot.holiday {
+    background-color: var(--info);
+}
+
+/* Filter Group Vertical */
+.filter-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Recent Attendance List */
+.recent-attendance-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.recent-attendance-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    background-color: var(--gray-50);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--gray-300);
+}
+
+.recent-attendance-item.present {
+    border-left-color: var(--success);
+}
+
+.recent-attendance-item.absent {
+    border-left-color: var(--error);
+}
+
+.recent-attendance-item.leave {
+    border-left-color: var(--warning);
+}
+
+.attendance-date-info {
+    flex: 1;
+}
+
+.attendance-date-info h4 {
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    font-size: var(--font-sm);
+}
+
+.attendance-date-info p {
+    color: var(--gray-600);
+    font-size: var(--font-xs);
+}
+
+.attendance-time-info {
+    text-align: right;
+}
+
+.attendance-time-info .time {
+    color: var(--gray-900);
+    font-weight: var(--font-medium);
+    font-size: var(--font-sm);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.attendance-time-info .hours {
+    color: var(--gray-600);
+    font-size: var(--font-xs);
+}
+
+/* Quick Stats List */
+.quick-stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.quick-stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--gray-50);
+    border-radius: var(--radius-md);
+}
+
+.stat-icon-small {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background-color: var(--primary-lighter);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+}
+
+.stat-info-small {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-value-small {
+    font-weight: var(--font-bold);
+    color: var(--gray-900);
+    font-size: var(--font-base);
+}
+
+.stat-label-small {
+    font-size: var(--font-xs);
+    color: var(--gray-600);
+}
+
+/* Attendance Table Status */
+.table .attendance-status {
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.table .attendance-status.present {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.table .attendance-status.absent {
+    background-color: var(--error-light);
+    color: var(--error);
+}
+
+.table .attendance-status.leave {
+    background-color: var(--warning-light);
+    color: var(--warning);
+}
+
+.table .attendance-status.holiday {
+    background-color: var(--info-light);
+    color: var(--info);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .attendance-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .current-status-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .status-left {
+        flex-direction: column;
+    }
+    
+    .time-display {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .time-separator {
+        transform: rotate(90deg);
+    }
+    
+    .status-right {
+        width: 100%;
+    }
+    
+    .status-right .btn {
+        width: 100%;
+    }
+    
+    .attendance-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .calendar-legend {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .attendance-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendar-weekday,
+    .calendar-day {
+        font-size: var(--font-xs);
+    }
+}
+
+/* ================================
+   MARK ATTENDANCE PAGE STYLES
+   ================================ */
+
+/* Attendance Date Header */
+.attendance-date-header {
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+    color: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.date-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: blur(10px);
+}
+
+.date-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.current-date-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.current-date-display h2 {
+    font-size: var(--font-2xl);
+    margin: 0;
+}
+
+.date-input {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-md);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: var(--font-sm);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.date-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+/* Attendance Summary Cards */
+.attendance-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.summary-stat-card {
+    background-color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all var(--transition-base);
+}
+
+.summary-stat-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.stat-icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: var(--white);
+}
+
+.summary-stat-card.total .stat-icon-circle {
+    background: linear-gradient(135deg, #4F46E5, #4338CA);
+}
+
+.summary-stat-card.present .stat-icon-circle {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.summary-stat-card.absent .stat-icon-circle {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.summary-stat-card.leave .stat-icon-circle {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+}
+
+.summary-stat-card.pending .stat-icon-circle {
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
+    color: var(--gray-900);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: var(--font-sm);
+    color: var(--gray-600);
+    margin-top: 0.25rem;
+}
+
+/* Attendance Filters */
+.attendance-filters {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+/* Attendance Marking Table */
+.attendance-marking-table {
+    min-width: 900px;
+}
+
+.attendance-quick-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.quick-status-btn {
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: var(--font-xs);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    color: var(--white);
+}
+
+.quick-status-btn.present {
+    background-color: var(--success);
+}
+
+.quick-status-btn.absent {
+    background-color: var(--error);
+}
+
+.quick-status-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.action-mark-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-300);
+    background-color: var(--white);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.action-mark-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Time Input Cells */
+.time-input-cell {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.time-input-small {
+    padding: 0.375rem 0.5rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--font-xs);
+    width: 80px;
+}
+
+.time-input-small:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Bulk Actions Bar */
+.bulk-actions-bar {
+    position: fixed;
+    bottom: 0;
+    left: 280px;
+    right: 0;
+    background-color: var(--white);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: all var(--transition-base);
+}
+
+.selected-count {
+    font-size: var(--font-lg);
+    font-weight: var(--font-semibold);
+    color: var(--gray-900);
+}
+
+.bulk-action-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+/* Save Actions */
+.save-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+}
+
+/* Status Options in Modal */
+.status-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.status-option {
+    cursor: pointer;
+}
+
+.status-option input[type="radio"] {
+    display: none;
+}
+
+.status-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.status-card i {
+    font-size: 2rem;
+}
+
+.status-option input[type="radio"]:checked + .status-card {
+    border-color: var(--primary-color);
+    background-color: var(--primary-lighter);
+}
+
+.status-card.present {
+    color: var(--success);
+}
+
+.status-card.absent {
+    color: var(--error);
+}
+
+.status-option input[type="radio"]:checked + .status-card.present {
+    border-color: var(--success);
+    background-color: var(--success-light);
+}
+
+.status-option input[type="radio"]:checked + .status-card.absent {
+    border-color: var(--error);
+    background-color: var(--error-light);
+}
+
+/* Employee Attendance Info */
+.employee-attendance-info {
+    background-color: var(--gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.employee-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.employee-info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: var(--font-medium);
+    color: var(--gray-700);
+    font-size: var(--font-sm);
+}
+
+.info-value {
+    font-weight: var(--font-semibold);
+    color: var(--gray-900);
+    font-size: var(--font-sm);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .bulk-actions-bar {
+        left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .attendance-date-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .date-selector {
+        flex-direction: column;
+    }
+    
+    .date-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .date-actions .btn {
+        width: 100%;
+    }
+    
+    .attendance-summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .attendance-filters {
+        flex-direction: column;
+    }
+    
+    .filter-select,
+    .filter-input {
+        width: 100%;
+    }
+    
+    .bulk-actions-bar {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .bulk-action-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .bulk-action-buttons .btn {
+        width: 100%;
+    }
+    
+    .status-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .save-actions {
+        flex-direction: column;
+    }
+    
+    .save-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .attendance-summary-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   ATTENDANCE RECORDS PAGE STYLES
+   ================================ */
+
+/* Attendance Overview Stats */
+.attendance-overview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.overview-stat-card {
+    background-color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all var(--transition-base);
+}
+
+.overview-stat-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.overview-stat-card.present .stat-card-icon {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.overview-stat-card.total-days .stat-card-icon {
+    background: linear-gradient(135deg, #4F46E5, #4338CA);
+}
+
+.overview-stat-card.late .stat-card-icon {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+}
+
+.overview-stat-card.early .stat-card-icon {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.stat-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
+    color: var(--gray-900);
+    line-height: 1;
+}
+
+/* Attendance Records Filters */
+.attendance-records-filters {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-input-small {
+    padding: 0.625rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    color: var(--gray-900);
+    width: 140px;
+}
+
+.filter-input-small:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-lighter);
+}
+
+.filter-group span {
+    color: var(--gray-600);
+    font-size: var(--font-sm);
+}
+
+/* Attendance Records Table */
+.attendance-records-table {
+    min-width: 1200px;
+}
+
+.records-count {
+    font-size: var(--font-sm);
+    color: var(--gray-600);
+    font-weight: var(--font-medium);
+}
+
+/* Working Hours Column */
+.working-hours {
+    font-weight: var(--font-semibold);
+    color: var(--gray-900);
+}
+
+.working-hours.full {
+    color: var(--success);
+}
+
+.working-hours.partial {
+    color: var(--warning);
+}
+
+.working-hours.none {
+    color: var(--error);
+}
+
+/* Remarks Column */
+.remarks-text {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--font-sm);
+    color: var(--gray-600);
+}
+
+/* Attendance Analytics Grid */
+.attendance-analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+/* Edit Attendance Info */
+.edit-attendance-info {
+    background-color: var(--gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.info-row-edit {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.info-row-edit:last-child {
+    border-bottom: none;
+}
+
+.info-label-edit {
+    font-weight: var(--font-medium);
+    color: var(--gray-700);
+    font-size: var(--font-sm);
+}
+
+.info-value-edit {
+    font-weight: var(--font-semibold);
+    color: var(--gray-900);
+    font-size: var(--font-sm);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .attendance-analytics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .attendance-overview-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .attendance-records-filters {
+        flex-direction: column;
+    }
+    
+    .filter-select,
+    .filter-input-small {
+        width: 100%;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .attendance-overview-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   ATTENDANCE SUMMARY PAGE STYLES
+   ================================ */
+
+/* Month Selector */
+.month-selector-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.month-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.month-nav-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.month-display h2 {
+    font-size: var(--font-2xl);
+    color: var(--gray-900);
+    margin: 0;
+    min-width: 200px;
+    text-align: center;
+}
+
+/* Summary Stats Grid */
+.attendance-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.summary-stat-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    gap: var(--spacing-md);
+    transition: all var(--transition-base);
+}
+
+.summary-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.summary-stat-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    flex-shrink: 0;
+}
+
+.summary-stat-card.present .summary-stat-icon {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.summary-stat-card.absent .summary-stat-icon {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.summary-stat-card.leave .summary-stat-icon {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+}
+
+.summary-stat-card.percentage .summary-stat-icon {
+    background: linear-gradient(135deg, #4F46E5, #4338CA);
+}
+
+.summary-stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-stat-value {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
+    color: var(--gray-900);
+    line-height: 1;
+}
+
+.summary-stat-label {
+    font-size: var(--font-sm);
+    color: var(--gray-700);
+    font-weight: var(--font-semibold);
+}
+
+.summary-stat-sublabel {
+    font-size: var(--font-xs);
+    color: var(--gray-500);
+}
+
+/* Charts Row */
+.charts-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Hours Stats Grid */
+.hours-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.hours-stat-item {
+    padding: var(--spacing-md);
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hours-stat-label {
+    font-size: var(--font-xs);
+    color: var(--gray-600);
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hours-stat-value {
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--gray-900);
+}
+
+/* Summary Table */
+.attendance-summary-table {
+    min-width: 900px;
+}
+
+.attendance-summary-table tbody tr:hover {
+    background: var(--gray-50);
+}
+
+/* Performance Grid */
+.performance-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.performance-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.performance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.performance-header h4 {
+    font-size: var(--font-base);
+    color: var(--gray-900);
+    font-weight: var(--font-semibold);
+}
+
+.performance-score {
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-md);
+}
+
+.performance-score.excellent {
+    background: #D1FAE5;
+    color: #059669;
+}
+
+.performance-score.good {
+    background: #DBEAFE;
+    color: #2563EB;
+}
+
+.performance-score.average {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.performance-score.poor {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.performance-bar {
+    height: 12px;
+    background: var(--gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.performance-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 1s ease-out;
+}
+
+.performance-fill.excellent {
+    background: linear-gradient(90deg, #10B981, #059669);
+}
+
+.performance-fill.good {
+    background: linear-gradient(90deg, #3B82F6, #2563EB);
+}
+
+.performance-fill.average {
+    background: linear-gradient(90deg, #F59E0B, #D97706);
+}
+
+.performance-fill.poor {
+    background: linear-gradient(90deg, #EF4444, #DC2626);
+}
+
+.performance-note {
+    font-size: var(--font-xs);
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.performance-note i {
+    color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .attendance-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .month-selector-bar {
+        gap: var(--spacing-md);
+    }
+
+    .month-display h2 {
+        font-size: var(--font-xl);
+        min-width: 150px;
+    }
+
+    .hours-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .attendance-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hours-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

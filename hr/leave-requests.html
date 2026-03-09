@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leave Requests - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/leave.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="employees.html">All Employees</a></li>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="active"><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Leave Requests</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search employees...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">5 pending leave requests</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Leave Requests Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Leave Requests</span>
+                </nav>
+                
+                <!-- Alert Message (Hidden by default) -->
+                <div class="alert alert-success" id="leaveRequestAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="alertMessage"></span>
+                    <button type="button" class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Leave Requests Stats -->
+                <div class="leave-requests-stats">
+                    <div class="leave-stat-card pending">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="pendingCount">8</span>
+                            <span class="stat-card-label">Pending Requests</span>
+                        </div>
+                    </div>
+                    
+                    <div class="leave-stat-card approved">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="approvedCount">42</span>
+                            <span class="stat-card-label">Approved This Month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="leave-stat-card rejected">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="rejectedCount">3</span>
+                            <span class="stat-card-label">Rejected This Month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="leave-stat-card upcoming">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="upcomingCount">15</span>
+                            <span class="stat-card-label">Upcoming Leaves</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Filters Tabs -->
+                <div class="quick-filter-tabs">
+                    <button class="tab-btn active" onclick="filterByStatus('pending')" data-status="pending">
+                        <i class="fas fa-clock"></i>
+                        Pending <span class="tab-badge">8</span>
+                    </button>
+                    <button class="tab-btn" onclick="filterByStatus('all')" data-status="all">
+                        <i class="fas fa-list"></i>
+                        All Requests
+                    </button>
+                    <button class="tab-btn" onclick="filterByStatus('approved')" data-status="approved">
+                        <i class="fas fa-check"></i>
+                        Approved
+                    </button>
+                    <button class="tab-btn" onclick="filterByStatus('rejected')" data-status="rejected">
+                        <i class="fas fa-times"></i>
+                        Rejected
+                    </button>
+                </div>
+                
+                <!-- Filters -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="leave-filters">
+                            <div class="filter-group">
+                                <label for="leaveTypeFilter" class="filter-label">Leave Type:</label>
+                                <select id="leaveTypeFilter" class="filter-select" onchange="applyFilters()">
+                                    <option value="all">All Types</option>
+                                    <option value="casual">Casual Leave</option>
+                                    <option value="sick">Sick Leave</option>
+                                    <option value="privilege">Privilege Leave</option>
+                                    <option value="maternity">Maternity Leave</option>
+                                    <option value="paternity">Paternity Leave</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="departmentFilterLeave" class="filter-label">Department:</label>
+                                <select id="departmentFilterLeave" class="filter-select" onchange="applyFilters()">
+                                    <option value="all">All Departments</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="operations">Operations</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="dateRangeFilter" class="filter-label">Date Range:</label>
+                                <select id="dateRangeFilter" class="filter-select" onchange="applyFilters()">
+                                    <option value="all">All Dates</option>
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="searchLeaveRequest" class="filter-label">Search:</label>
+                                <input 
+                                    type="text" 
+                                    id="searchLeaveRequest" 
+                                    class="filter-input" 
+                                    placeholder="Employee name..."
+                                    onkeyup="applyFilters()"
+                                >
+                            </div>
+                            
+                            <button class="btn btn-secondary" onclick="resetLeaveFilters()">
+                                <i class="fas fa-redo"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leave Requests List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-list-ul"></i>
+                            Leave Requests
+                        </h3>
+                        <div class="card-actions">
+                            <button class="btn-icon" onclick="exportLeaveRequests()" title="Export to Excel">
+                                <i class="fas fa-file-excel"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="leaveRequestsList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyStateLeave" style="display: none;">
+                            <i class="fas fa-inbox"></i>
+                            <h3>No Leave Requests Found</h3>
+                            <p>There are no leave requests matching your filters.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- Leave Details Modal -->
+    <div class="modal" id="leaveDetailsModal">
+        <div class="modal-overlay" onclick="closeLeaveDetailsModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-info-circle"></i>
+                    Leave Request Details
+                </h3>
+                <button class="modal-close" onclick="closeLeaveDetailsModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="leave-detail-content">
+                    <!-- Employee Info -->
+                    <div class="detail-section">
+                        <h4>Employee Information</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Employee Name:</span>
+                                <span class="detail-value" id="modalEmpName">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Employee ID:</span>
+                                <span class="detail-value" id="modalEmpId">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Department:</span>
+                                <span class="detail-value" id="modalEmpDept">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Designation:</span>
+                                <span class="detail-value" id="modalEmpDesig">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Leave Info -->
+                    <div class="detail-section">
+                        <h4>Leave Information</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Leave Type:</span>
+                                <span class="detail-value" id="modalLeaveType">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Duration:</span>
+                                <span class="detail-value" id="modalLeaveDuration">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Start Date:</span>
+                                <span class="detail-value" id="modalStartDate">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">End Date:</span>
+                                <span class="detail-value" id="modalEndDate">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Total Days:</span>
+                                <span class="detail-value" id="modalTotalDays">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Applied On:</span>
+                                <span class="detail-value" id="modalAppliedDate">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reason -->
+                    <div class="detail-section">
+                        <h4>Reason for Leave</h4>
+                        <p class="leave-reason" id="modalLeaveReason">-</p>
+                    </div>
+                    
+                    <!-- Balance Info -->
+                    <div class="detail-section">
+                        <h4>Leave Balance</h4>
+                        <div class="balance-info-grid">
+                            <div class="balance-info-item">
+                                <span class="balance-label">Available:</span>
+                                <span class="balance-value" id="modalAvailable">-</span>
+                            </div>
+                            <div class="balance-info-item">
+                                <span class="balance-label">After This Leave:</span>
+                                <span class="balance-value" id="modalAfterLeave">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Attachment -->
+                    <div class="detail-section" id="attachmentSection" style="display: none;">
+                        <h4>Attachment</h4>
+                        <a href="#" class="attachment-link" id="modalAttachment">
+                            <i class="fas fa-paperclip"></i>
+                            <span>View Attachment</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeLeaveDetailsModal()">
+                    Close
+                </button>
+                <button class="btn btn-danger" onclick="openRejectModal()" id="rejectBtnModal">
+                    <i class="fas fa-times"></i>
+                    Reject
+                </button>
+                <button class="btn btn-success" onclick="approveLeaveRequest()" id="approveBtnModal">
+                    <i class="fas fa-check"></i>
+                    Approve
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reject Modal -->
+    <div class="modal" id="rejectModal">
+        <div class="modal-overlay" onclick="closeRejectModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-times-circle"></i>
+                    Reject Leave Request
+                </h3>
+                <button class="modal-close" onclick="closeRejectModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please provide a reason for rejecting this leave request:</p>
+                <form id="rejectForm">
+                    <div class="form-group">
+                        <label for="rejectReason" class="form-label">
+                            Rejection Reason <span class="required">*</span>
+                        </label>
+                        <textarea 
+                            id="rejectReason" 
+                            name="rejectReason" 
+                            class="form-control" 
+                            rows="4"
+                            placeholder="Enter reason for rejection..."
+                            required
+                        ></textarea>
+                        <div class="error-message" id="rejectReasonError"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeRejectModal()">
+                    Cancel
+                </button>
+                <button class="btn btn-danger" onclick="confirmReject()">
+                    <i class="fas fa-times"></i>
+                    Reject Leave
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/leave-requests.js"></script>
+    
+</body>
+</html>

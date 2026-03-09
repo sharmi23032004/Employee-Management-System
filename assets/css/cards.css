@@ -1,0 +1,50 @@
+/* ================================
+   CARD COMPONENTS
+   ================================ */
+
+.card {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    color: var(--gray-900);
+    font-size: var(--font-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.card-header h3 i {
+    color: var(--primary-color);
+}
+
+.view-all-link {
+    color: var(--primary-color);
+    font-size: var(--font-sm);
+    font-weight: var(--font-medium);
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+.card-footer {
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--gray-200);
+    background-color: var(--gray-50);
+}

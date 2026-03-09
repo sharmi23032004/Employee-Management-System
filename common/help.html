@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Employee Management System</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/help.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <span class="logo-text">EMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-user">
+            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="user-info">
+                <h4 id="userName">John Doe</h4>
+                <span class="user-role">Employee</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="menu-item">
+                    <a href="../employee/dashboard.html">
+                        <i class="fas fa-home"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../employee/attendance.html">
+                        <i class="fas fa-calendar-check"></i><span>My Attendance</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../employee/leave.html">
+                        <i class="fas fa-calendar-alt"></i><span>Leave</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../employee/payslips.html">
+                        <i class="fas fa-file-invoice-dollar"></i><span>Payslips</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../employee/profile.html">
+                        <i class="fas fa-user"></i><span>My Profile</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="notifications.html">
+                        <i class="fas fa-bell"></i><span>Notifications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="help.html">
+                        <i class="fas fa-question-circle"></i><span>Help & Support</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Help & Support</h1>
+            </div>
+            <div class="navbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search help articles...">
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="icon-btn notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count">12</span>
+                    </button>
+                    <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifications</h3>
+                            <a href="#" class="mark-read">Mark all as read</a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="notifications.html">View all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <div class="user-avatar-small">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <span class="user-name-nav" id="userNameNav">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                        <div class="profile-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info-dropdown">
+                                <h4 id="userNameDropdown">John Doe</h4>
+                                <p id="userEmailDropdown">john.doe@company.com</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="../employee/profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content-wrapper">
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../employee/dashboard.html">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Help & Support</span>
+            </nav>
+
+            <!-- Help Header -->
+            <div class="help-header">
+                <div class="help-header-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="help-header-content">
+                    <h1>How can we help you?</h1>
+                    <p>Search our knowledge base or contact support</p>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="help-search-bar">
+                <div class="help-search-input-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="helpSearchInput"
+                           placeholder="Search for help articles, guides, FAQs..."
+                           onkeyup="searchHelp()">
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-help-grid">
+                <div class="quick-help-card" onclick="scrollToSection('attendance')">
+                    <div class="quick-help-icon attendance">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Attendance</h3>
+                    <p>Mark attendance, view records</p>
+                </div>
+
+                <div class="quick-help-card" onclick="scrollToSection('leave')">
+                    <div class="quick-help-icon leave">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h3>Leave Management</h3>
+                    <p>Apply, track leave requests</p>
+                </div>
+
+                <div class="quick-help-card" onclick="scrollToSection('payroll')">
+                    <div class="quick-help-icon payroll">
+                        <i class="fas fa-money-check-alt"></i>
+                    </div>
+                    <h3>Payroll & Payslips</h3>
+                    <p>View salary, download slips</p>
+                </div>
+
+                <div class="quick-help-card" onclick="scrollToSection('profile')">
+                    <div class="quick-help-icon profile">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Profile Settings</h3>
+                    <p>Update personal information</p>
+                </div>
+            </div>
+
+            <!-- FAQs -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                </div>
+                <div class="card-body">
+
+                    <!-- Category: Attendance -->
+                    <div class="faq-category" id="attendance">
+                        <h3 class="faq-category-title">
+                            <i class="fas fa-calendar-check"></i> Attendance
+                        </h3>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>How do I mark my daily attendance?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>To mark your attendance:</p>
+                                    <ol>
+                                        <li>Navigate to <strong>My Attendance</strong> from the sidebar</li>
+                                        <li>Click on <strong>Check In</strong> button when you arrive</li>
+                                        <li>Click <strong>Check Out</strong> when leaving for the day</li>
+                                        <li>Your attendance will be automatically recorded with timestamps</li>
+                                    </ol>
+                                    <p>Note: Grace period of 15 minutes is allowed for late check-ins.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>What if I forgot to mark attendance?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>If you forgot to mark attendance, contact your manager or HR department.
+                                       They can manually update your attendance records. Provide the date and
+                                       approximate working hours.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>Can I view my attendance history?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Yes! Go to <strong>My Attendance</strong> and use the calendar view
+                                       to see your complete attendance history, including check-in/out times,
+                                       working hours, and any late arrivals.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Leave -->
+                    <div class="faq-category" id="leave">
+                        <h3 class="faq-category-title">
+                            <i class="fas fa-umbrella-beach"></i> Leave Management
+                        </h3>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>How do I apply for leave?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>To apply for leave:</p>
+                                    <ol>
+                                        <li>Go to <strong>Leave</strong> section</li>
+                                        <li>Click <strong>Apply Leave</strong> button</li>
+                                        <li>Select leave type (Casual, Sick, Privilege, etc.)</li>
+                                        <li>Choose start and end dates</li>
+                                        <li>Add reason for leave</li>
+                                        <li>Submit for manager approval</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>How many leaves am I entitled to?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Standard leave entitlements per year:</p>
+                                    <ul>
+                                        <li><strong>Casual Leave:</strong> 12 days</li>
+                                        <li><strong>Sick Leave:</strong> 12 days</li>
+                                        <li><strong>Privilege Leave:</strong> 15 days</li>
+                                    </ul>
+                                    <p>You can view your current leave balance in the Leave section.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>Can I cancel my leave request?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Yes, you can cancel pending leave requests before they are approved.
+                                       Go to Leave History, find your request, and click the Cancel button.
+                                       Once approved, contact your manager to cancel.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Payroll -->
+                    <div class="faq-category" id="payroll">
+                        <h3 class="faq-category-title">
+                            <i class="fas fa-money-check-alt"></i> Payroll & Payslips
+                        </h3>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>When will I receive my salary?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Salaries are processed on the last working day of each month.
+                                       The amount is credited to your registered bank account by the
+                                       1st or 2nd of the following month.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>How can I download my payslip?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>To download your payslip:</p>
+                                    <ol>
+                                        <li>Navigate to <strong>Payslips</strong> section</li>
+                                        <li>Select the month you need</li>
+                                        <li>Click the <strong>Download</strong> button</li>
+                                        <li>Payslip will be downloaded as a PDF</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>What deductions are made from my salary?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Standard deductions include:</p>
+                                    <ul>
+                                        <li><strong>Provident Fund (PF):</strong> 12% of basic salary</li>
+                                        <li><strong>Professional Tax:</strong> As per state regulations</li>
+                                        <li><strong>Income Tax (TDS):</strong> Based on tax slab</li>
+                                        <li><strong>Leave deductions:</strong> For unpaid leave days</li>
+                                    </ul>
+                                    <p>All deductions are detailed in your monthly payslip.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Profile -->
+                    <div class="faq-category" id="profile">
+                        <h3 class="faq-category-title">
+                            <i class="fas fa-user-circle"></i> Profile & Account
+                        </h3>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>How do I update my personal information?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>You can update your email, phone number, and address in the
+                                       <strong>My Profile</strong> section. For changes to your name,
+                                       date of birth, or bank details, please contact HR with supporting
+                                       documents.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>How do I reset my password?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>To reset your password:</p>
+                                    <ol>
+                                        <li>Go to <strong>Settings</strong> → Account</li>
+                                        <li>Enter your current password</li>
+                                        <li>Enter new password (min 8 characters, with uppercase & number)</li>
+                                        <li>Confirm new password and save</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <h4>I forgot my password. What should I do?</h4>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>On the login page, click <strong>"Forgot Password?"</strong>.
+                                       Enter your registered email address, and you'll receive a
+                                       password reset link within 5 minutes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Contact Support -->
+            <div class="contact-support-section">
+                <div class="contact-support-card">
+                    <div class="contact-icon email">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Support</h3>
+                    <p>Get help via email</p>
+                    <a href="mailto:support@company.com" class="contact-link">
+                        support@company.com
+                    </a>
+                </div>
+
+                <div class="contact-support-card">
+                    <div class="contact-icon phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone Support</h3>
+                    <p>Mon-Fri, 9 AM - 6 PM</p>
+                    <a href="tel:+914440000000" class="contact-link">
+                        +91 44 4000 0000
+                    </a>
+                </div>
+
+                <div class="contact-support-card">
+                    <div class="contact-icon hr">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>HR Department</h3>
+                    <p>Contact HR directly</p>
+                    <a href="mailto:hr@company.com" class="contact-link">
+                        hr@company.com
+                    </a>
+                </div>
+            </div>
+
+            <!-- System Info -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-info-circle"></i> System Information</h3>
+                </div>
+                <div class="card-body">
+                    <div class="system-info-grid">
+                        <div class="system-info-item">
+                            <span class="info-key">Version:</span>
+                            <span class="info-value">2.4.5</span>
+                        </div>
+                        <div class="system-info-item">
+                            <span class="info-key">Browser:</span>
+                            <span class="info-value" id="browserInfo">-</span>
+                        </div>
+                        <div class="system-info-item">
+                            <span class="info-key">Last Updated:</span>
+                            <span class="info-value">February 15, 2026</span>
+                        </div>
+                        <div class="system-info-item">
+                            <span class="info-key">Support Hours:</span>
+                            <span class="info-value">Mon-Fri, 9 AM - 6 PM IST</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/common/sidebar.js"></script>
+<script src="../assets/js/common/navbar.js"></script>
+<script src="../assets/js/common/help.js"></script>
+
+</body>
+</html>

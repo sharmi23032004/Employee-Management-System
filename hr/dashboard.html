@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HR Dashboard - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item active">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="employees.html">All Employees</a></li>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">HR Dashboard</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search employees...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">5 pending leave requests</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon info">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">New employee onboarding today</p>
+                                        <span class="notification-time">1 hour ago</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="content-wrapper">
+                
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <div class="welcome-content">
+                        <h2>Welcome back, Sarah! 👋</h2>
+                        <p id="currentDate">Monday, February 16, 2026</p>
+                    </div>
+                    <div class="welcome-actions">
+                        <button class="btn btn-primary" onclick="window.location.href='add-employee.html'">
+                            <i class="fas fa-user-plus"></i>
+                            Add Employee
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.location.href='mark-attendance.html'">
+                            <i class="fas fa-calendar-check"></i>
+                            Mark Attendance
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">248</h3>
+                            <p class="stat-label">Total Employees</p>
+                            <span class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 5 this month
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card green">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">234</h3>
+                            <p class="stat-label">Present Today</p>
+                            <span class="stat-change">
+                                94.4% attendance
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card orange">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">5</h3>
+                            <p class="stat-label">Pending Leaves</p>
+                            <span class="stat-change warning">
+                                <i class="fas fa-exclamation-circle"></i> Needs approval
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card purple">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value">3</h3>
+                            <p class="stat-label">New Joinings</p>
+                            <span class="stat-change">
+                                This week
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Dashboard Grid -->
+                <div class="dashboard-grid">
+                    
+                    <!-- Left Column -->
+                    <div class="dashboard-left">
+                        
+                        <!-- Pending Leave Requests -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-hourglass-half"></i>
+                                    Pending Leave Requests
+                                </h3>
+                                <a href="leave-requests.html" class="view-all-link">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="leave-requests-list">
+                                    <div class="leave-request-item">
+                                        <div class="employee-info-mini">
+                                            <div class="employee-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="employee-details">
+                                                <h4>John Doe</h4>
+                                                <p>Senior Developer</p>
+                                            </div>
+                                        </div>
+                                        <div class="leave-info">
+                                            <span class="leave-type casual">Casual Leave</span>
+                                            <span class="leave-dates">Feb 20-22, 2026</span>
+                                            <span class="leave-days">3 days</span>
+                                        </div>
+                                        <div class="leave-actions">
+                                            <button class="btn-icon-sm approve" onclick="approveLeave(1)" title="Approve">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="btn-icon-sm reject" onclick="rejectLeave(1)" title="Reject">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <button class="btn-icon-sm view" onclick="viewLeaveDetails(1)" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="leave-request-item">
+                                        <div class="employee-info-mini">
+                                            <div class="employee-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="employee-details">
+                                                <h4>Jane Smith</h4>
+                                                <p>Marketing Manager</p>
+                                            </div>
+                                        </div>
+                                        <div class="leave-info">
+                                            <span class="leave-type sick">Sick Leave</span>
+                                            <span class="leave-dates">Feb 17, 2026</span>
+                                            <span class="leave-days">1 day</span>
+                                        </div>
+                                        <div class="leave-actions">
+                                            <button class="btn-icon-sm approve" onclick="approveLeave(2)" title="Approve">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="btn-icon-sm reject" onclick="rejectLeave(2)" title="Reject">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <button class="btn-icon-sm view" onclick="viewLeaveDetails(2)" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="leave-request-item">
+                                        <div class="employee-info-mini">
+                                            <div class="employee-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="employee-details">
+                                                <h4>Mike Wilson</h4>
+                                                <p>Sales Executive</p>
+                                            </div>
+                                        </div>
+                                        <div class="leave-info">
+                                            <span class="leave-type privilege">Privilege Leave</span>
+                                            <span class="leave-dates">Feb 25-28, 2026</span>
+                                            <span class="leave-days">4 days</span>
+                                        </div>
+                                        <div class="leave-actions">
+                                            <button class="btn-icon-sm approve" onclick="approveLeave(3)" title="Approve">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="btn-icon-sm reject" onclick="rejectLeave(3)" title="Reject">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <button class="btn-icon-sm view" onclick="viewLeaveDetails(3)" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Today's Attendance -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-calendar-day"></i>
+                                    Today's Attendance Summary
+                                </h3>
+                                <a href="attendance-records.html" class="view-all-link">View Details</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="attendance-summary-grid">
+                                    <div class="attendance-summary-item present">
+                                        <div class="summary-icon">
+                                            <i class="fas fa-user-check"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <span class="summary-value">234</span>
+                                            <span class="summary-label">Present</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-summary-item absent">
+                                        <div class="summary-icon">
+                                            <i class="fas fa-user-times"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <span class="summary-value">8</span>
+                                            <span class="summary-label">Absent</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-summary-item leave">
+                                        <div class="summary-icon">
+                                            <i class="fas fa-umbrella-beach"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <span class="summary-value">4</span>
+                                            <span class="summary-label">On Leave</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-summary-item late">
+                                        <div class="summary-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <span class="summary-value">12</span>
+                                            <span class="summary-label">Late Arrival</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="attendance-chart-container">
+                                    <canvas id="attendancePieChart" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Department-wise Employee Count -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-building"></i>
+                                    Department-wise Distribution
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="departmentChart" height="250"></canvas>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="dashboard-right">
+                        
+                        <!-- Quick Actions -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-bolt"></i>
+                                    Quick Actions
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="quick-actions-grid">
+                                    <button class="quick-action-btn" onclick="window.location.href='add-employee.html'">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Add Employee</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="window.location.href='mark-attendance.html'">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>Mark Attendance</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="window.location.href='process-salary.html'">
+                                        <i class="fas fa-money-check-alt"></i>
+                                        <span>Process Salary</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="window.location.href='reports.html'">
+                                        <i class="fas fa-chart-bar"></i>
+                                        <span>View Reports</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Upcoming Events -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Upcoming Events
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="events-list">
+                                    <div class="event-item">
+                                        <div class="event-date">
+                                            <span class="date">18</span>
+                                            <span class="month">FEB</span>
+                                        </div>
+                                        <div class="event-details">
+                                            <h4>New Employee Orientation</h4>
+                                            <p>10:00 AM - Conference Room A</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="event-item">
+                                        <div class="event-date">
+                                            <span class="date">20</span>
+                                            <span class="month">FEB</span>
+                                        </div>
+                                        <div class="event-details">
+                                            <h4>Performance Review Meeting</h4>
+                                            <p>2:00 PM - HR Office</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="event-item">
+                                        <div class="event-date">
+                                            <span class="date">25</span>
+                                            <span class="month">FEB</span>
+                                        </div>
+                                        <div class="event-details">
+                                            <h4>Salary Processing Deadline</h4>
+                                            <p>All Day</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="event-item">
+                                        <div class="event-date">
+                                            <span class="date">28</span>
+                                            <span class="month">FEB</span>
+                                        </div>
+                                        <div class="event-details">
+                                            <h4>Monthly HR Team Meeting</h4>
+                                            <p>11:00 AM - Online</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activities -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-history"></i>
+                                    Recent Activities
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="activities-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon success">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Approved leave request from <strong>John Doe</strong></p>
+                                            <span class="activity-time">10 minutes ago</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <div class="activity-icon info">
+                                            <i class="fas fa-user-plus"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Added new employee <strong>Emily Davis</strong></p>
+                                            <span class="activity-time">1 hour ago</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <div class="activity-icon warning">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Updated salary for <strong>Mike Wilson</strong></p>
+                                            <span class="activity-time">2 hours ago</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <div class="activity-icon success">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Marked attendance for <strong>Engineering Dept</strong></p>
+                                            <span class="activity-time">3 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Announcements -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-bullhorn"></i>
+                                    Announcements
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="announcements-list">
+                                    <div class="announcement-item">
+                                        <div class="announcement-icon">
+                                            <i class="fas fa-gift"></i>
+                                        </div>
+                                        <div class="announcement-content">
+                                            <h4>Annual Bonus Distribution</h4>
+                                            <p>Performance bonuses will be credited on Feb 28, 2026</p>
+                                            <span class="announcement-date">Posted 2 days ago</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="announcement-item">
+                                        <div class="announcement-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="announcement-content">
+                                            <h4>Holiday Notice</h4>
+                                            <p>Office will remain closed on March 8 for Holi celebration</p>
+                                            <span class="announcement-date">Posted 3 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/hr-dashboard.js"></script>
+    
+</body>
+</html>

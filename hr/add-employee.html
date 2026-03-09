@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Employee - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/employee-management.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="employees.html">All Employees</a></li>
+                            <li class="active"><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Add New Employee</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search employees...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">5 pending leave requests</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Add Employee Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="employees.html">Employees</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Add Employee</span>
+                </nav>
+                
+                <!-- Alert Message (Hidden by default) -->
+                <div class="alert alert-success" id="addEmployeeAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="alertMessage"></span>
+                    <button type="button" class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Form Progress Steps -->
+                <div class="form-steps-container">
+                    <div class="form-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Personal Info</div>
+                    </div>
+                    <div class="form-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Employment</div>
+                    </div>
+                    <div class="form-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Salary</div>
+                    </div>
+                    <div class="form-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Documents</div>
+                    </div>
+                </div>
+                
+                <!-- Add Employee Form -->
+                <form id="addEmployeeForm" class="multi-step-form" novalidate>
+                    
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step-content active" data-step="1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-user"></i>
+                                    Personal Information
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                
+                                <!-- Profile Photo Upload -->
+                                <div class="form-group">
+                                    <label class="form-label">Profile Photo</label>
+                                    <div class="photo-upload-container">
+                                        <div class="photo-preview" id="photoPreview">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="photo-upload-actions">
+                                            <input type="file" id="profilePhoto" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                                            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('profilePhoto').click()">
+                                                <i class="fas fa-upload"></i>
+                                                Upload Photo
+                                            </button>
+                                            <button type="button" class="btn btn-secondary btn-sm" onclick="removePhoto()" id="removePhotoBtn" style="display: none;">
+                                                <i class="fas fa-trash"></i>
+                                                Remove
+                                            </button>
+                                            <small class="form-help">JPG, PNG or GIF (Max 2MB)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="firstName" class="form-label">
+                                            First Name <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="firstName" 
+                                            name="firstName" 
+                                            class="form-control"
+                                            placeholder="Enter first name"
+                                            required
+                                        >
+                                        <div class="error-message" id="firstNameError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="lastName" class="form-label">
+                                            Last Name <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="lastName" 
+                                            name="lastName" 
+                                            class="form-control"
+                                            placeholder="Enter last name"
+                                            required
+                                        >
+                                        <div class="error-message" id="lastNameError"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">
+                                            Email Address <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="email" 
+                                            id="email" 
+                                            name="email" 
+                                            class="form-control"
+                                            placeholder="employee@company.com"
+                                            required
+                                        >
+                                        <div class="error-message" id="emailError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">
+                                            Phone Number <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="tel" 
+                                            id="phone" 
+                                            name="phone" 
+                                            class="form-control"
+                                            placeholder="+91 9876543210"
+                                            required
+                                        >
+                                        <div class="error-message" id="phoneError"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="dateOfBirth" class="form-label">
+                                            Date of Birth <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="date" 
+                                            id="dateOfBirth" 
+                                            name="dateOfBirth" 
+                                            class="form-control"
+                                            required
+                                        >
+                                        <div class="error-message" id="dateOfBirthError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="gender" class="form-label">
+                                            Gender <span class="required">*</span>
+                                        </label>
+                                        <select id="gender" name="gender" class="form-control" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="error-message" id="genderError"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="address" class="form-label">
+                                        Address <span class="required">*</span>
+                                    </label>
+                                    <textarea 
+                                        id="address" 
+                                        name="address" 
+                                        class="form-control" 
+                                        rows="3"
+                                        placeholder="Enter full address"
+                                        required
+                                    ></textarea>
+                                    <div class="error-message" id="addressError"></div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="city" class="form-label">
+                                            City <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="city" 
+                                            name="city" 
+                                            class="form-control"
+                                            placeholder="Enter city"
+                                            required
+                                        >
+                                        <div class="error-message" id="cityError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="state" class="form-label">
+                                            State <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="state" 
+                                            name="state" 
+                                            class="form-control"
+                                            placeholder="Enter state"
+                                            required
+                                        >
+                                        <div class="error-message" id="stateError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="pincode" class="form-label">
+                                            PIN Code <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="pincode" 
+                                            name="pincode" 
+                                            class="form-control"
+                                            placeholder="600001"
+                                            required
+                                            maxlength="6"
+                                        >
+                                        <div class="error-message" id="pincodeError"></div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Employment Information -->
+                    <div class="form-step-content" data-step="2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-briefcase"></i>
+                                    Employment Information
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="employeeId" class="form-label">
+                                            Employee ID <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="employeeId" 
+                                            name="employeeId" 
+                                            class="form-control"
+                                            placeholder="EMP-XXX"
+                                            required
+                                        >
+                                        <div class="error-message" id="employeeIdError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="joinDate" class="form-label">
+                                            Join Date <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="date" 
+                                            id="joinDate" 
+                                            name="joinDate" 
+                                            class="form-control"
+                                            required
+                                        >
+                                        <div class="error-message" id="joinDateError"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="department" class="form-label">
+                                            Department <span class="required">*</span>
+                                        </label>
+                                        <select id="department" name="department" class="form-control" required>
+                                            <option value="">Select Department</option>
+                                            <option value="engineering">Engineering</option>
+                                            <option value="sales">Sales</option>
+                                            <option value="marketing">Marketing</option>
+                                            <option value="hr">Human Resources</option>
+                                            <option value="finance">Finance</option>
+                                            <option value="operations">Operations</option>
+                                        </select>
+                                        <div class="error-message" id="departmentError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="designation" class="form-label">
+                                            Designation <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="designation" 
+                                            name="designation" 
+                                            class="form-control"
+                                            placeholder="e.g., Senior Developer"
+                                            required
+                                        >
+                                        <div class="error-message" id="designationError"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="employmentType" class="form-label">
+                                            Employment Type <span class="required">*</span>
+                                        </label>
+                                        <select id="employmentType" name="employmentType" class="form-control" required>
+                                            <option value="">Select Type</option>
+                                            <option value="fulltime">Full Time</option>
+                                            <option value="parttime">Part Time</option>
+                                            <option value="contract">Contract</option>
+                                            <option value="intern">Intern</option>
+                                        </select>
+                                        <div class="error-message" id="employmentTypeError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="reportingManager" class="form-label">
+                                            Reporting Manager
+                                        </label>
+                                        <select id="reportingManager" name="reportingManager" class="form-control">
+                                            <option value="">Select Manager</option>
+                                            <option value="MGR-001">Robert Smith - Engineering Manager</option>
+                                            <option value="MGR-002">Lisa Anderson - Sales Manager</option>
+                                            <option value="MGR-003">Michael Brown - Marketing Head</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="workLocation" class="form-label">
+                                            Work Location <span class="required">*</span>
+                                        </label>
+                                        <select id="workLocation" name="workLocation" class="form-control" required>
+                                            <option value="">Select Location</option>
+                                            <option value="chennai">Chennai Office</option>
+                                            <option value="bangalore">Bangalore Office</option>
+                                            <option value="mumbai">Mumbai Office</option>
+                                            <option value="delhi">Delhi Office</option>
+                                            <option value="remote">Remote</option>
+                                        </select>
+                                        <div class="error-message" id="workLocationError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="probationPeriod" class="form-label">
+                                            Probation Period (Months)
+                                        </label>
+                                        <input 
+                                            type="number" 
+                                            id="probationPeriod" 
+                                            name="probationPeriod" 
+                                            class="form-control"
+                                            placeholder="3"
+                                            min="0"
+                                            max="12"
+                                        >
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Salary Information -->
+                    <div class="form-step-content" data-step="3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-money-check-alt"></i>
+                                    Salary Information
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="basicSalary" class="form-label">
+                                            Basic Salary (Monthly) <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="number" 
+                                            id="basicSalary" 
+                                            name="basicSalary" 
+                                            class="form-control"
+                                            placeholder="30000"
+                                            required
+                                            onchange="calculateGrossSalary()"
+                                        >
+                                        <div class="error-message" id="basicSalaryError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="hra" class="form-label">
+                                            HRA (House Rent Allowance)
+                                        </label>
+                                        <input 
+                                            type="number" 
+                                            id="hra" 
+                                            name="hra" 
+                                            class="form-control"
+                                            placeholder="15000"
+                                            onchange="calculateGrossSalary()"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="specialAllowance" class="form-label">
+                                            Special Allowance
+                                        </label>
+                                        <input 
+                                            type="number" 
+                                            id="specialAllowance" 
+                                            name="specialAllowance" 
+                                            class="form-control"
+                                            placeholder="10000"
+                                            onchange="calculateGrossSalary()"
+                                        >
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="otherAllowances" class="form-label">
+                                            Other Allowances
+                                        </label>
+                                        <input 
+                                            type="number" 
+                                            id="otherAllowances" 
+                                            name="otherAllowances" 
+                                            class="form-control"
+                                            placeholder="5000"
+                                            onchange="calculateGrossSalary()"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="salary-summary">
+                                    <div class="summary-row">
+                                        <span class="summary-label">Gross Monthly Salary:</span>
+                                        <span class="summary-value" id="grossMonthlySalary">₹0</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span class="summary-label">Annual CTC:</span>
+                                        <span class="summary-value highlight" id="annualCTC">₹0</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="bankName" class="form-label">
+                                        Bank Name <span class="required">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="bankName" 
+                                        name="bankName" 
+                                        class="form-control"
+                                        placeholder="e.g., HDFC Bank"
+                                        required
+                                    >
+                                    <div class="error-message" id="bankNameError"></div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="accountNumber" class="form-label">
+                                            Account Number <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="accountNumber" 
+                                            name="accountNumber" 
+                                            class="form-control"
+                                            placeholder="XXXXXXXXXXXX1234"
+                                            required
+                                        >
+                                        <div class="error-message" id="accountNumberError"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ifscCode" class="form-label">
+                                            IFSC Code <span class="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="ifscCode" 
+                                            name="ifscCode" 
+                                            class="form-control"
+                                            placeholder="HDFC0001234"
+                                            required
+                                        >
+                                        <div class="error-message" id="ifscCodeError"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="panNumber" class="form-label">
+                                        PAN Number <span class="required">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="panNumber" 
+                                        name="panNumber" 
+                                        class="form-control"
+                                        placeholder="ABCDE1234F"
+                                        required
+                                        maxlength="10"
+                                        style="text-transform: uppercase;"
+                                    >
+                                    <div class="error-message" id="panNumberError"></div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Documents -->
+                    <div class="form-step-content" data-step="4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-file-upload"></i>
+                                    Upload Documents
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="documents-upload-section">
+                                    <div class="document-upload-item">
+                                        <div class="document-icon">
+                                            <i class="fas fa-id-card"></i>
+                                        </div>
+                                        <div class="document-info">
+                                            <h4>Aadhaar Card</h4>
+                                            <p>Upload Aadhaar card (PDF, JPG, PNG - Max 2MB)</p>
+                                        </div>
+                                        <div class="document-actions">
+                                            <input type="file" id="aadhaarCard" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" onchange="handleDocumentUpload(event, 'aadhaar')">
+                                            <button type="button" class="btn btn-sm btn-secondary" onclick="document.getElementById('aadhaarCard').click()">
+                                                <i class="fas fa-upload"></i>
+                                                Upload
+                                            </button>
+                                            <span class="upload-status" id="aadhaarStatus"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="document-upload-item">
+                                        <div class="document-icon">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <div class="document-info">
+                                            <h4>PAN Card</h4>
+                                            <p>Upload PAN card (PDF, JPG, PNG - Max 2MB)</p>
+                                        </div>
+                                        <div class="document-actions">
+                                            <input type="file" id="panCard" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" onchange="handleDocumentUpload(event, 'pan')">
+                                            <button type="button" class="btn btn-sm btn-secondary" onclick="document.getElementById('panCard').click()">
+                                                <i class="fas fa-upload"></i>
+                                                Upload
+                                            </button>
+                                            <span class="upload-status" id="panStatus"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="document-upload-item">
+                                        <div class="document-icon">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                        <div class="document-info">
+                                            <h4>Education Certificates</h4>
+                                            <p>Upload degree/diploma certificates (PDF, JPG, PNG - Max 5MB)</p>
+                                        </div>
+                                        <div class="document-actions">
+                                            <input type="file" id="educationCert" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" onchange="handleDocumentUpload(event, 'education')">
+                                            <button type="button" class="btn btn-sm btn-secondary" onclick="document.getElementById('educationCert').click()">
+                                                <i class="fas fa-upload"></i>
+                                                Upload
+                                            </button>
+                                            <span class="upload-status" id="educationStatus"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="document-upload-item">
+                                        <div class="document-icon">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="document-info">
+                                            <h4>Resume/CV</h4>
+                                            <p>Upload resume (PDF, DOC, DOCX - Max 5MB)</p>
+                                        </div>
+                                        <div class="document-actions">
+                                            <input type="file" id="resume" accept=".pdf,.doc,.docx" style="display: none;" onchange="handleDocumentUpload(event, 'resume')">
+                                            <button type="button" class="btn btn-sm btn-secondary" onclick="document.getElementById('resume').click()">
+                                                <i class="fas fa-upload"></i>
+                                                Upload
+                                            </button>
+                                            <span class="upload-status" id="resumeStatus"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Navigation -->
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">
+                            <i class="fas fa-arrow-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                            Next
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                            <span class="btn-text">
+                                <i class="fas fa-check"></i>
+                                Add Employee
+                            </span>
+                            <span class="btn-loader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Adding...
+                            </span>
+                        </button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/validation.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/add-employee.js"></script>
+    
+</body>
+</html>

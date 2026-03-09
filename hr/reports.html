@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reports & Analytics - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/reports.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="employees.html">All Employees</a></li>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Reports & Analytics</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search reports...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">5 pending leave requests</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Reports Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Reports & Analytics</span>
+                </nav>
+                
+                <!-- Quick Reports -->
+                <div class="quick-reports-section">
+                    <h2 class="section-title">Quick Reports</h2>
+                    <div class="quick-reports-grid">
+                        <div class="quick-report-card" onclick="generateReport('employee')">
+                            <div class="report-card-icon employees">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="report-card-content">
+                                <h3>Employee Report</h3>
+                                <p>Complete employee directory with details</p>
+                            </div>
+                            <button class="report-card-btn">
+                                <i class="fas fa-file-download"></i>
+                                Generate
+                            </button>
+                        </div>
+                        
+                        <div class="quick-report-card" onclick="generateReport('attendance')">
+                            <div class="report-card-icon attendance">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="report-card-content">
+                                <h3>Attendance Report</h3>
+                                <p>Monthly attendance summary</p>
+                            </div>
+                            <button class="report-card-btn">
+                                <i class="fas fa-file-download"></i>
+                                Generate
+                            </button>
+                        </div>
+                        
+                        <div class="quick-report-card" onclick="generateReport('leave')">
+                            <div class="report-card-icon leave">
+                                <i class="fas fa-umbrella-beach"></i>
+                            </div>
+                            <div class="report-card-content">
+                                <h3>Leave Report</h3>
+                                <p>Leave balance and history</p>
+                            </div>
+                            <button class="report-card-btn">
+                                <i class="fas fa-file-download"></i>
+                                Generate
+                            </button>
+                        </div>
+                        
+                        <div class="quick-report-card" onclick="generateReport('payroll')">
+                            <div class="report-card-icon payroll">
+                                <i class="fas fa-money-check-alt"></i>
+                            </div>
+                            <div class="report-card-content">
+                                <h3>Payroll Report</h3>
+                                <p>Salary and payment details</p>
+                            </div>
+                            <button class="report-card-btn">
+                                <i class="fas fa-file-download"></i>
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Custom Report Builder -->
+                <div class="custom-report-section">
+                    <h2 class="section-title">Custom Report Builder</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="customReportForm" class="custom-report-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="reportType" class="form-label">Report Type <span class="required">*</span></label>
+                                        <select id="reportType" class="form-control" required>
+                                            <option value="">Select Report Type</option>
+                                            <option value="employee">Employee Report</option>
+                                            <option value="attendance">Attendance Report</option>
+                                            <option value="leave">Leave Report</option>
+                                            <option value="payroll">Payroll Report</option>
+                                            <option value="performance">Performance Report</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="reportFormat" class="form-label">Format <span class="required">*</span></label>
+                                        <select id="reportFormat" class="form-control" required>
+                                            <option value="excel">Excel (.xlsx)</option>
+                                            <option value="pdf">PDF (.pdf)</option>
+                                            <option value="csv">CSV (.csv)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="reportDepartment" class="form-label">Department</label>
+                                        <select id="reportDepartment" class="form-control">
+                                            <option value="all">All Departments</option>
+                                            <option value="engineering">Engineering</option>
+                                            <option value="sales">Sales</option>
+                                            <option value="marketing">Marketing</option>
+                                            <option value="hr">Human Resources</option>
+                                            <option value="finance">Finance</option>
+                                            <option value="operations">Operations</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="reportPeriod" class="form-label">Period <span class="required">*</span></label>
+                                        <select id="reportPeriod" class="form-control" required>
+                                            <option value="thismonth">This Month</option>
+                                            <option value="lastmonth">Last Month</option>
+                                            <option value="quarter">This Quarter</option>
+                                            <option value="year">This Year</option>
+                                            <option value="custom">Custom Range</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row" id="customDateRange" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="startDate" class="form-label">Start Date</label>
+                                        <input type="date" id="startDate" class="form-control">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="endDate" class="form-label">End Date</label>
+                                        <input type="date" id="endDate" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-file-download"></i>
+                                        Generate Custom Report
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytics Dashboard -->
+                <div class="analytics-section">
+                    <h2 class="section-title">HR Analytics Dashboard</h2>
+                    
+                    <!-- Key Metrics -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Total Headcount</span>
+                                <i class="fas fa-users metric-icon"></i>
+                            </div>
+                            <div class="metric-value">248</div>
+                            <div class="metric-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5 from last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Avg. Attendance</span>
+                                <i class="fas fa-calendar-check metric-icon"></i>
+                            </div>
+                            <div class="metric-value">94.5%</div>
+                            <div class="metric-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+1.2% from last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Attrition Rate</span>
+                                <i class="fas fa-user-slash metric-icon"></i>
+                            </div>
+                            <div class="metric-value">3.2%</div>
+                            <div class="metric-trend negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-0.5% from last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Monthly Payroll</span>
+                                <i class="fas fa-money-bill-wave metric-icon"></i>
+                            </div>
+                            <div class="metric-value">₹1.11Cr</div>
+                            <div class="metric-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+2.5% from last month</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Charts Grid -->
+                    <div class="analytics-charts-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-line"></i>
+                                    Headcount Trend (Last 6 Months)
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="headcountTrendChart" height="250"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-pie"></i>
+                                    Employee Distribution by Department
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="departmentDistributionChart" height="250"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-bar"></i>
+                                    Attendance vs Leave Trend
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="attendanceLeaveChart" height="250"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-area"></i>
+                                    Monthly Payroll Trend
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="payrollTrendChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Reports -->
+                <div class="recent-reports-section">
+                    <h2 class="section-title">Recent Reports</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="recent-reports-list">
+                                <div class="recent-report-item">
+                                    <div class="report-icon excel">
+                                        <i class="fas fa-file-excel"></i>
+                                    </div>
+                                    <div class="report-info">
+                                        <h4>Monthly Attendance Report - January 2026</h4>
+                                        <p>Generated on Feb 1, 2026 by Sarah Johnson</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary" onclick="downloadReport('attendance-jan-2026')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                                
+                                <div class="recent-report-item">
+                                    <div class="report-icon pdf">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="report-info">
+                                        <h4>Payroll Summary - January 2026</h4>
+                                        <p>Generated on Jan 31, 2026 by Sarah Johnson</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary" onclick="downloadReport('payroll-jan-2026')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                                
+                                <div class="recent-report-item">
+                                    <div class="report-icon excel">
+                                        <i class="fas fa-file-excel"></i>
+                                    </div>
+                                    <div class="report-info">
+                                        <h4>Employee Directory - All Departments</h4>
+                                        <p>Generated on Jan 28, 2026 by Sarah Johnson</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary" onclick="downloadReport('employee-dir-2026')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/reports.js"></script>
+    
+</body>
+</html>

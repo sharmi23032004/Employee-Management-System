@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Employee Management System</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <span class="logo-text">EMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-user">
+            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="user-info">
+                <h4 id="userName">John Doe</h4>
+                <span class="user-role">Employee</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="attendance.html">
+                        <i class="fas fa-calendar-check"></i><span>My Attendance</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="leave.html">
+                        <i class="fas fa-calendar-alt"></i><span>Leave</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="payslips.html">
+                        <i class="fas fa-file-invoice-dollar"></i><span>Payslips</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i><span>My Profile</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../common/notifications.html">
+                        <i class="fas fa-bell"></i><span>Notifications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../common/settings.html">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../common/help.html">
+                        <i class="fas fa-question-circle"></i><span>Help & Support</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">My Profile</h1>
+            </div>
+            <div class="navbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="icon-btn notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count">3</span>
+                    </button>
+                    <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifications</h3>
+                            <a href="#" class="mark-read">Mark all as read</a>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p class="notification-text">Leave request approved</p>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="../common/notifications.html">View all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <div class="user-avatar-small">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <span class="user-name-nav" id="userNameNav">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                        <div class="profile-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info-dropdown">
+                                <h4 id="userNameDropdown">John Doe</h4>
+                                <p id="userEmailDropdown">john.doe@company.com</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="../common/settings.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content-wrapper">
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>My Profile</span>
+            </nav>
+
+            <!-- Profile Header Card -->
+            <div class="profile-header-card">
+                <div class="profile-cover">
+                    <div class="profile-cover-gradient"></div>
+                </div>
+                <div class="profile-header-content">
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <button class="avatar-upload-btn" onclick="openAvatarUpload()">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-header-info">
+                        <h1 class="profile-name">John Doe</h1>
+                        <p class="profile-designation">Senior Software Engineer</p>
+                        <div class="profile-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-id-badge"></i> EMP-001
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-building"></i> Engineering
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-calendar"></i> Joined Jan 2020
+                            </span>
+                        </div>
+                    </div>
+                    <div class="profile-header-actions">
+                        <button class="btn btn-secondary" onclick="window.location.href='edit-profile.html'">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                        <button class="btn btn-primary" onclick="window.location.href='documents.html'">
+                            <i class="fas fa-folder"></i> Documents
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Content Grid -->
+            <div class="profile-grid">
+
+                <!-- Left Column -->
+                <div class="profile-left-column">
+
+                    <!-- Personal Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user-circle"></i> Personal Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-info-list">
+                                <div class="profile-info-item">
+                                    <span class="info-label">Full Name</span>
+                                    <span class="info-value">John Michael Doe</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Gender</span>
+                                    <span class="info-value">Male</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Date of Birth</span>
+                                    <span class="info-value">January 15, 1990</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Marital Status</span>
+                                    <span class="info-value">Married</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Blood Group</span>
+                                    <span class="info-value">O+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-info-list">
+                                <div class="profile-info-item">
+                                    <span class="info-label">Email</span>
+                                    <span class="info-value">
+                                        <a href="mailto:john.doe@company.com">john.doe@company.com</a>
+                                    </span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Phone</span>
+                                    <span class="info-value">
+                                        <a href="tel:+919876543210">+91 9876543210</a>
+                                    </span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Emergency Contact</span>
+                                    <span class="info-value">+91 9876543211</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Current Address</span>
+                                    <span class="info-value">
+                                        #123, MG Road, Indiranagar,<br>
+                                        Bangalore, Karnataka - 560038
+                                    </span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Permanent Address</span>
+                                    <span class="info-value">
+                                        #456, Park Street,<br>
+                                        Chennai, Tamil Nadu - 600001
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Details -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-university"></i> Bank Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-info-list">
+                                <div class="profile-info-item">
+                                    <span class="info-label">Bank Name</span>
+                                    <span class="info-value">HDFC Bank</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Account Number</span>
+                                    <span class="info-value">XXXX XXXX 1234</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">IFSC Code</span>
+                                    <span class="info-value">HDFC0001234</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Branch</span>
+                                    <span class="info-value">Indiranagar, Bangalore</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">PAN Number</span>
+                                    <span class="info-value">ABCDE1234F</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column -->
+                <div class="profile-right-column">
+
+                    <!-- Employment Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-briefcase"></i> Employment Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-info-list">
+                                <div class="profile-info-item">
+                                    <span class="info-label">Employee ID</span>
+                                    <span class="info-value">EMP-001</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Designation</span>
+                                    <span class="info-value">Senior Software Engineer</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Department</span>
+                                    <span class="info-value">Engineering</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Reporting Manager</span>
+                                    <span class="info-value">Sarah Johnson</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Date of Joining</span>
+                                    <span class="info-value">January 15, 2020</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Employment Type</span>
+                                    <span class="info-value">Full-time</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Work Location</span>
+                                    <span class="info-value">Bangalore Office</span>
+                                </div>
+                                <div class="profile-info-item">
+                                    <span class="info-label">Employee Status</span>
+                                    <span class="info-value">
+                                        <span class="status-badge active">Active</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="education-list">
+                                <div class="education-item">
+                                    <div class="education-degree">
+                                        <i class="fas fa-certificate"></i>
+                                        <div>
+                                            <h4>Master of Computer Applications</h4>
+                                            <p>Anna University, Chennai</p>
+                                        </div>
+                                    </div>
+                                    <span class="education-year">2012 - 2015</span>
+                                </div>
+                                <div class="education-item">
+                                    <div class="education-degree">
+                                        <i class="fas fa-certificate"></i>
+                                        <div>
+                                            <h4>Bachelor of Computer Science</h4>
+                                            <p>University of Madras, Chennai</p>
+                                        </div>
+                                    </div>
+                                    <span class="education-year">2008 - 2012</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-code"></i> Skills</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="skills-list">
+                                <span class="skill-badge">JavaScript</span>
+                                <span class="skill-badge">React.js</span>
+                                <span class="skill-badge">Node.js</span>
+                                <span class="skill-badge">Python</span>
+                                <span class="skill-badge">SQL</span>
+                                <span class="skill-badge">MongoDB</span>
+                                <span class="skill-badge">AWS</span>
+                                <span class="skill-badge">Docker</span>
+                                <span class="skill-badge">Git</span>
+                                <span class="skill-badge">Agile</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="experience-timeline">
+                                <div class="experience-item">
+                                    <div class="experience-dot"></div>
+                                    <div class="experience-content">
+                                        <h4>Senior Software Engineer</h4>
+                                        <p class="experience-company">TechCorp Solutions</p>
+                                        <p class="experience-duration">
+                                            Jan 2020 - Present · 4 years
+                                        </p>
+                                        <p class="experience-desc">
+                                            Leading frontend development team, architecting scalable
+                                            web applications using React and Node.js.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="experience-item">
+                                    <div class="experience-dot"></div>
+                                    <div class="experience-content">
+                                        <h4>Software Engineer</h4>
+                                        <p class="experience-company">InnovateTech Pvt Ltd</p>
+                                        <p class="experience-duration">
+                                            Jun 2015 - Dec 2019 · 4.5 years
+                                        </p>
+                                        <p class="experience-desc">
+                                            Developed full-stack applications, contributed to
+                                            microservices architecture.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Avatar Upload Modal -->
+<div class="modal" id="avatarUploadModal">
+    <div class="modal-overlay" onclick="closeAvatarUpload()"></div>
+    <div class="modal-content modal-small">
+        <div class="modal-header">
+            <h3><i class="fas fa-camera"></i> Update Profile Picture</h3>
+            <button class="modal-close" onclick="closeAvatarUpload()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="avatar-upload-zone" id="avatarDropZone"
+                 ondragover="handleDragOver(event)"
+                 ondragleave="handleDragLeave(event)"
+                 ondrop="handleDrop(event)">
+                <div class="avatar-preview" id="avatarPreview">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p>Drag & drop your photo here</p>
+                <p style="margin: 0.5rem 0;">or</p>
+                <button class="btn btn-secondary"
+                        onclick="document.getElementById('avatarFileInput').click()">
+                    <i class="fas fa-upload"></i> Choose File
+                </button>
+                <input type="file" id="avatarFileInput" accept="image/*"
+                       style="display:none;" onchange="previewAvatar(event)">
+                <p class="upload-hint">PNG, JPG up to 5 MB</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeAvatarUpload()">
+                Cancel
+            </button>
+            <button class="btn btn-primary" onclick="uploadAvatar()" id="uploadAvatarBtn">
+                <i class="fas fa-check"></i> Upload
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/common/sidebar.js"></script>
+<script src="../assets/js/common/navbar.js"></script>
+<script src="../assets/js/employee/profile.js"></script>
+
+</body>
+</html>

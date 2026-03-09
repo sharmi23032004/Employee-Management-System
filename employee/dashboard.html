@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Employee Dashboard - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">John Doe</h4>
+                    <span class="user-role">Employee</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item active">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="my-profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="apply-leave.html">Apply Leave</a></li>
+                            <li><a href="my-leaves.html">My Leaves</a></li>
+                            <li><a href="leave-balance.html">Leave Balance</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-clock"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-attendance.html">My Attendance</a></li>
+                            <li><a href="attendance-summary.html">Monthly Summary</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-payslips.html">My Payslips</a></li>
+                            <li><a href="salary-details.html">Salary Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="change-password.html">
+                            <i class="fas fa-key"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">3</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Leave approved for Dec 15-17</p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon info">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Payslip for November available</p>
+                                        <span class="notification-time">5 hours ago</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="notification-item">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Please update your profile</p>
+                                        <span class="notification-time">1 day ago</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">John Doe</h4>
+                                    <p id="userEmailDropdown">john.doe@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <a href="change-password.html" class="dropdown-item">
+                                <i class="fas fa-key"></i>
+                                Change Password
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="content-wrapper">
+                
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <div class="welcome-content">
+                        <h2>Welcome back, <span id="welcomeUserName">John</span>! 👋</h2>
+                        <p>Here's what's happening with your account today</p>
+                    </div>
+                    <div class="welcome-date">
+                        <i class="fas fa-calendar-day"></i>
+                        <span id="currentDate">Monday, February 09, 2026</span>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon attendance">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value" id="attendancePercentage">92%</h3>
+                            <p class="stat-label">Attendance Rate</p>
+                            <span class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 3% this month
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon leaves">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value" id="leaveBalance">12</h3>
+                            <p class="stat-label">Leave Balance</p>
+                            <span class="stat-change">
+                                Out of 24 days
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value" id="pendingLeaves">2</h3>
+                            <p class="stat-label">Pending Requests</p>
+                            <span class="stat-change warning">
+                                <i class="fas fa-clock"></i> Awaiting approval
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon salary">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value" id="lastSalary">₹45,000</h3>
+                            <p class="stat-label">Last Month Salary</p>
+                            <span class="stat-change">
+                                <i class="fas fa-check-circle"></i> Processed
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Dashboard Grid -->
+                <div class="dashboard-grid">
+                    
+                    <!-- Left Column -->
+                    <div class="dashboard-left">
+                        
+                        <!-- Recent Attendance Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-clock"></i>
+                                    Recent Attendance
+                                </h3>
+                                <a href="my-attendance.html" class="view-all-link">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="attendance-calendar">
+                                    <div class="attendance-item present">
+                                        <div class="attendance-date">
+                                            <span class="day">Mon</span>
+                                            <span class="date">05</span>
+                                        </div>
+                                        <div class="attendance-status">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Present</span>
+                                        </div>
+                                        <div class="attendance-time">
+                                            <span>09:00 AM - 06:00 PM</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-item present">
+                                        <div class="attendance-date">
+                                            <span class="day">Tue</span>
+                                            <span class="date">06</span>
+                                        </div>
+                                        <div class="attendance-status">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Present</span>
+                                        </div>
+                                        <div class="attendance-time">
+                                            <span>09:15 AM - 06:10 PM</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-item absent">
+                                        <div class="attendance-date">
+                                            <span class="day">Wed</span>
+                                            <span class="date">07</span>
+                                        </div>
+                                        <div class="attendance-status">
+                                            <i class="fas fa-times-circle"></i>
+                                            <span>Leave</span>
+                                        </div>
+                                        <div class="attendance-time">
+                                            <span>Sick Leave</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-item present">
+                                        <div class="attendance-date">
+                                            <span class="day">Thu</span>
+                                            <span class="date">08</span>
+                                        </div>
+                                        <div class="attendance-status">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Present</span>
+                                        </div>
+                                        <div class="attendance-time">
+                                            <span>08:55 AM - 06:05 PM</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="attendance-item today">
+                                        <div class="attendance-date">
+                                            <span class="day">Fri</span>
+                                            <span class="date">09</span>
+                                        </div>
+                                        <div class="attendance-status">
+                                            <i class="fas fa-circle"></i>
+                                            <span>Today</span>
+                                        </div>
+                                        <div class="attendance-time">
+                                            <span>09:05 AM - Now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Leave Requests Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-calendar-check"></i>
+                                    My Leave Requests
+                                </h3>
+                                <a href="my-leaves.html" class="view-all-link">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="leave-requests-list">
+                                    <div class="leave-request-item pending">
+                                        <div class="leave-header">
+                                            <span class="leave-type">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                Casual Leave
+                                            </span>
+                                            <span class="leave-status pending">Pending</span>
+                                        </div>
+                                        <div class="leave-details">
+                                            <div class="leave-dates">
+                                                <i class="fas fa-calendar"></i>
+                                                Dec 15, 2025 - Dec 17, 2025 (3 days)
+                                            </div>
+                                            <div class="leave-reason">
+                                                <i class="fas fa-comment"></i>
+                                                Family function
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="leave-request-item approved">
+                                        <div class="leave-header">
+                                            <span class="leave-type">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                Sick Leave
+                                            </span>
+                                            <span class="leave-status approved">Approved</span>
+                                        </div>
+                                        <div class="leave-details">
+                                            <div class="leave-dates">
+                                                <i class="fas fa-calendar"></i>
+                                                Feb 07, 2026 (1 day)
+                                            </div>
+                                            <div class="leave-reason">
+                                                <i class="fas fa-comment"></i>
+                                                Medical appointment
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="leave-request-item rejected">
+                                        <div class="leave-header">
+                                            <span class="leave-type">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                Privilege Leave
+                                            </span>
+                                            <span class="leave-status rejected">Rejected</span>
+                                        </div>
+                                        <div class="leave-details">
+                                            <div class="leave-dates">
+                                                <i class="fas fa-calendar"></i>
+                                                Jan 20, 2026 - Jan 24, 2026 (5 days)
+                                            </div>
+                                            <div class="leave-reason">
+                                                <i class="fas fa-comment"></i>
+                                                Project deadline conflict
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-primary btn-block mt-3" onclick="window.location.href='apply-leave.html'">
+                                    <i class="fas fa-plus"></i>
+                                    Apply for Leave
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="dashboard-right">
+                        
+                        <!-- Attendance Chart Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-line"></i>
+                                    Monthly Attendance
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="attendanceChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Leave Balance Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-pie-chart"></i>
+                                    Leave Balance Overview
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="leaveBalanceChart"></canvas>
+                                
+                                <div class="leave-balance-details">
+                                    <div class="balance-item">
+                                        <div class="balance-dot casual"></div>
+                                        <span class="balance-label">Casual Leave</span>
+                                        <span class="balance-value">5 / 12</span>
+                                    </div>
+                                    <div class="balance-item">
+                                        <div class="balance-dot sick"></div>
+                                        <span class="balance-label">Sick Leave</span>
+                                        <span class="balance-value">4 / 8</span>
+                                    </div>
+                                    <div class="balance-item">
+                                        <div class="balance-dot privilege"></div>
+                                        <span class="balance-label">Privilege Leave</span>
+                                        <span class="balance-value">3 / 4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Payslips Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    Recent Payslips
+                                </h3>
+                                <a href="my-payslips.html" class="view-all-link">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="payslip-list">
+                                    <div class="payslip-item">
+                                        <div class="payslip-info">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <div class="payslip-details">
+                                                <h4>November 2025</h4>
+                                                <p>₹45,000</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary" onclick="downloadPayslip('nov-2025')">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="payslip-item">
+                                        <div class="payslip-info">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <div class="payslip-details">
+                                                <h4>October 2025</h4>
+                                                <p>₹45,000</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary" onclick="downloadPayslip('oct-2025')">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="payslip-item">
+                                        <div class="payslip-info">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <div class="payslip-details">
+                                                <h4>September 2025</h4>
+                                                <p>₹45,000</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary" onclick="downloadPayslip('sep-2025')">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+                <!-- Quick Actions Section -->
+                <div class="quick-actions-section">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions-grid">
+                        <a href="apply-leave.html" class="quick-action-card">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-calendar-plus"></i>
+                            </div>
+                            <h4>Apply Leave</h4>
+                            <p>Request time off</p>
+                        </a>
+                        
+                        <a href="my-attendance.html" class="quick-action-card">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>View Attendance</h4>
+                            <p>Check attendance records</p>
+                        </a>
+                        
+                        <a href="my-payslips.html" class="quick-action-card">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-file-download"></i>
+                            </div>
+                            <h4>Download Payslip</h4>
+                            <p>Get salary statement</p>
+                        </a>
+                        
+                        <a href="my-profile.html" class="quick-action-card">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <h4>Update Profile</h4>
+                            <p>Edit personal info</p>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/employee/employee-dashboard.js"></script>
+    
+</body>
+</html>

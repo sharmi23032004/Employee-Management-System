@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Salary Details - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/payroll.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">John Doe</h4>
+                    <span class="user-role">Employee</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="my-profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="apply-leave.html">Apply Leave</a></li>
+                            <li><a href="my-leaves.html">My Leaves</a></li>
+                            <li><a href="leave-balance.html">Leave Balance</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-clock"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-attendance.html">My Attendance</a></li>
+                            <li><a href="attendance-summary.html">Monthly Summary</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-payslips.html">My Payslips</a></li>
+                            <li class="active"><a href="salary-details.html">Salary Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="change-password.html">
+                            <i class="fas fa-key"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Salary Details</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">3</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Payslip for January 2026 available</p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">John Doe</h4>
+                                    <p id="userEmailDropdown">john.doe@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <a href="change-password.html" class="dropdown-item">
+                                <i class="fas fa-key"></i>
+                                Change Password
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Salary Details Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Salary Details</span>
+                </nav>
+                
+                <!-- Salary Overview Card -->
+                <div class="salary-overview-card">
+                    <div class="overview-header">
+                        <div class="overview-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="overview-content">
+                            <h2>Salary Structure</h2>
+                            <p>Detailed breakdown of your compensation package</p>
+                        </div>
+                    </div>
+                    <div class="overview-stats">
+                        <div class="overview-stat">
+                            <span class="stat-label">Annual CTC</span>
+                            <span class="stat-value">₹6,60,000</span>
+                        </div>
+                        <div class="overview-stat">
+                            <span class="stat-label">Monthly Gross</span>
+                            <span class="stat-value">₹55,000</span>
+                        </div>
+                        <div class="overview-stat">
+                            <span class="stat-label">Monthly Net</span>
+                            <span class="stat-value highlight">₹45,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Salary Grid -->
+                <div class="salary-details-grid">
+                    
+                    <!-- Left Column - Salary Breakdown -->
+                    <div class="salary-details-left">
+                        
+                        <!-- Earnings Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-plus-circle"></i>
+                                    Earnings
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="salary-breakdown-table">
+                                    <div class="breakdown-row">
+                                        <div class="breakdown-item">
+                                            <div class="item-info">
+                                                <i class="fas fa-dollar-sign item-icon earnings"></i>
+                                                <div class="item-details">
+                                                    <h4>Basic Salary</h4>
+                                                    <p>54.5% of Gross Salary</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-amount">
+                                                <span class="monthly">₹30,000</span>
+                                                <span class="annual">(₹3,60,000 p.a.)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="breakdown-row">
+                                        <div class="breakdown-item">
+                                            <div class="item-info">
+                                                <i class="fas fa-home item-icon earnings"></i>
+                                                <div class="item-details">
+                                                    <h4>House Rent Allowance (HRA)</h4>
+                                                    <p>27.3% of Gross Salary</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-amount">
+                                                <span class="monthly">₹15,000</span>
+                                                <span class="annual">(₹1,80,000 p.a.)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="breakdown-row">
+                                        <div class="breakdown-item">
+                                            <div class="item-info">
+                                                <i class="fas fa-star item-icon earnings"></i>
+                                                <div class="item-details">
+                                                    <h4>Special Allowance</h4>
+                                                    <p>18.2% of Gross Salary</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-amount">
+                                                <span class="monthly">₹10,000</span>
+                                                <span class="annual">(₹1,20,000 p.a.)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="breakdown-total earnings-total">
+                                        <span class="total-label">Total Earnings</span>
+                                        <div class="total-amount">
+                                            <span class="monthly">₹55,000</span>
+                                            <span class="annual">(₹6,60,000 p.a.)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Deductions Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-minus-circle"></i>
+                                    Deductions
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="salary-breakdown-table">
+                                    <div class="breakdown-row">
+                                        <div class="breakdown-item">
+                                            <div class="item-info">
+                                                <i class="fas fa-piggy-bank item-icon deductions"></i>
+                                                <div class="item-details">
+                                                    <h4>Provident Fund (PF)</h4>
+                                                    <p>12% of Basic Salary</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-amount">
+                                                <span class="monthly">₹3,600</span>
+                                                <span class="annual">(₹43,200 p.a.)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="breakdown-row">
+                                        <div class="breakdown-item">
+                                            <div class="item-info">
+                                                <i class="fas fa-receipt item-icon deductions"></i>
+                                                <div class="item-details">
+                                                    <h4>Professional Tax</h4>
+                                                    <p>State Government Tax</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-amount">
+                                                <span class="monthly">₹200</span>
+                                                <span class="annual">(₹2,400 p.a.)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="breakdown-row">
+                                        <div class="breakdown-item">
+                                            <div class="item-info">
+                                                <i class="fas fa-university item-icon deductions"></i>
+                                                <div class="item-details">
+                                                    <h4>Income Tax (TDS)</h4>
+                                                    <p>Tax Deducted at Source</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-amount">
+                                                <span class="monthly">₹6,200</span>
+                                                <span class="annual">(₹74,400 p.a.)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="breakdown-total deductions-total">
+                                        <span class="total-label">Total Deductions</span>
+                                        <div class="total-amount">
+                                            <span class="monthly">₹10,000</span>
+                                            <span class="annual">(₹1,20,000 p.a.)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Net Salary Card -->
+                        <div class="net-salary-card">
+                            <div class="net-salary-content">
+                                <div class="net-salary-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="net-salary-info">
+                                    <h3>Net Take Home Salary</h3>
+                                    <p>After all deductions</p>
+                                </div>
+                            </div>
+                            <div class="net-salary-amounts">
+                                <div class="net-amount">
+                                    <span class="amount-label">Monthly</span>
+                                    <span class="amount-value">₹45,000</span>
+                                </div>
+                                <div class="net-amount">
+                                    <span class="amount-label">Annual</span>
+                                    <span class="amount-value">₹5,40,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Right Column - Charts & Info -->
+                    <div class="salary-details-right">
+                        
+                        <!-- Salary Distribution Chart -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-pie"></i>
+                                    Salary Distribution
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salaryDistributionChart" height="250"></canvas>
+                                <div class="chart-legend-custom">
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #4F46E5;"></span>
+                                        <span class="legend-label">Basic Salary</span>
+                                        <span class="legend-value">54.5%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #10B981;"></span>
+                                        <span class="legend-label">HRA</span>
+                                        <span class="legend-value">27.3%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #F59E0B;"></span>
+                                        <span class="legend-label">Special Allowance</span>
+                                        <span class="legend-value">18.2%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Deductions Chart -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-bar"></i>
+                                    Deductions Breakdown
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="deductionsChart" height="200"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Annual Projection -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Annual Projection
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="projection-stats">
+                                    <div class="projection-item">
+                                        <div class="projection-label">
+                                            <i class="fas fa-coins"></i>
+                                            Gross Annual Salary
+                                        </div>
+                                        <div class="projection-value">₹6,60,000</div>
+                                    </div>
+                                    
+                                    <div class="projection-item">
+                                        <div class="projection-label">
+                                            <i class="fas fa-hand-holding-usd"></i>
+                                            Total Annual Deductions
+                                        </div>
+                                        <div class="projection-value deduction">₹1,20,000</div>
+                                    </div>
+                                    
+                                    <div class="projection-item highlight">
+                                        <div class="projection-label">
+                                            <i class="fas fa-money-check-alt"></i>
+                                            Net Annual Salary
+                                        </div>
+                                        <div class="projection-value">₹5,40,000</div>
+                                    </div>
+                                    
+                                    <div class="projection-item">
+                                        <div class="projection-label">
+                                            <i class="fas fa-percentage"></i>
+                                            Effective Tax Rate
+                                        </div>
+                                        <div class="projection-value">18.2%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Benefits -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-gift"></i>
+                                    Additional Benefits
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="benefits-list">
+                                    <div class="benefit-item">
+                                        <i class="fas fa-heartbeat"></i>
+                                        <div class="benefit-content">
+                                            <h4>Health Insurance</h4>
+                                            <p>Coverage: ₹5,00,000</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-laptop"></i>
+                                        <div class="benefit-content">
+                                            <h4>Work From Home Allowance</h4>
+                                            <p>₹2,000 per month</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        <div class="benefit-content">
+                                            <h4>Learning & Development</h4>
+                                            <p>₹25,000 per year</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-dumbbell"></i>
+                                        <div class="benefit-content">
+                                            <h4>Wellness Benefits</h4>
+                                            <p>Gym membership included</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+                <!-- Tax Saving Tips -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-lightbulb"></i>
+                            Tax Saving Tips
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="tax-tips-grid">
+                            <div class="tax-tip-card">
+                                <div class="tip-icon">
+                                    <i class="fas fa-umbrella"></i>
+                                </div>
+                                <h4>Section 80C</h4>
+                                <p>Save up to ₹1,50,000 annually through ELSS, PPF, LIC, and more</p>
+                            </div>
+                            
+                            <div class="tax-tip-card">
+                                <div class="tip-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h4>HRA Exemption</h4>
+                                <p>Claim HRA exemption if you're paying rent</p>
+                            </div>
+                            
+                            <div class="tax-tip-card">
+                                <div class="tip-icon">
+                                    <i class="fas fa-medkit"></i>
+                                </div>
+                                <h4>Section 80D</h4>
+                                <p>Medical insurance premium deduction up to ₹25,000</p>
+                            </div>
+                            
+                            <div class="tax-tip-card">
+                                <div class="tip-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <h4>Section 80G</h4>
+                                <p>Donations to approved charities are eligible for deduction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/employee/salary-details.js"></script>
+    
+</body>
+</html>

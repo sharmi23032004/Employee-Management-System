@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Employee Management System</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/error.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="error-body">
+
+    <!-- Error Container -->
+    <div class="error-container">
+
+        <!-- Animated Background -->
+        <div class="error-bg-animation">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+            <div class="floating-shape shape-5"></div>
+        </div>
+
+        <!-- Error Content -->
+        <div class="error-content">
+
+            <!-- Logo -->
+            <div class="error-logo">
+                <i class="fas fa-users-cog"></i>
+                <span>EMS</span>
+            </div>
+
+            <!-- 404 Illustration -->
+            <div class="error-illustration">
+                <div class="error-404">
+                    <span class="digit">4</span>
+                    <span class="digit middle">
+                        <div class="search-icon-wrapper">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </span>
+                    <span class="digit">4</span>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message">
+                <h1>Oops! Page Not Found</h1>
+                <p>The page you're looking for doesn't exist or has been moved.</p>
+            </div>
+
+            <!-- Error Info -->
+            <div class="error-info">
+                <div class="error-info-item">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Error Code: <strong>404</strong></span>
+                </div>
+                <div class="error-info-item">
+                    <i class="fas fa-link"></i>
+                    <span>URL: <strong id="currentURL">-</strong></span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="error-actions">
+                <button class="error-btn primary" onclick="goHome()">
+                    <i class="fas fa-home"></i> Go to Dashboard
+                </button>
+                <button class="error-btn secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </button>
+                <button class="error-btn secondary" onclick="contactSupport()">
+                    <i class="fas fa-life-ring"></i> Contact Support
+                </button>
+            </div>
+
+            <!-- Helpful Links -->
+            <div class="helpful-links">
+                <h3>Maybe you're looking for:</h3>
+                <div class="links-grid">
+                    <a href="../employee/dashboard.html" class="quick-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../employee/attendance.html" class="quick-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="../employee/leave.html" class="quick-link">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <span>Leave</span>
+                    </a>
+                    <a href="../employee/payslips.html" class="quick-link">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Payslips</span>
+                    </a>
+                    <a href="../employee/profile.html" class="quick-link">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="../common/help.html" class="quick-link">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="error-search">
+                <h3>Or search for what you need:</h3>
+                <div class="error-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="errorSearchInput"
+                           placeholder="Search for pages, features, help articles..."
+                           onkeypress="handleSearchEnter(event)">
+                    <button class="search-btn" onclick="performSearch()">
+                        Search
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="error-footer">
+            <p>&copy; 2026 Employee Management System. All rights reserved.</p>
+            <div class="error-footer-links">
+                <a href="../common/help.html">Help Center</a>
+                <span>•</span>
+                <a href="mailto:support@company.com">Contact Support</a>
+                <span>•</span>
+                <a href="../auth/login.html">Login</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../assets/js/common/error.js"></script>
+    <script src="../employee/my-attendance.html"></script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+/* ================================
+   TABLE STYLES (for future use)
+   ================================ */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background-color: var(--gray-100);
+}
+
+.table th {
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: var(--font-semibold);
+    color: var(--gray-900);
+    font-size: var(--font-sm);
+    border-bottom: 2px solid var(--gray-300);
+}
+
+.table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-700);
+    font-size: var(--font-sm);
+}
+
+.table tbody tr:hover {
+    background-color: var(--gray-50);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}

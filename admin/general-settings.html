@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Settings - Employee Management System</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/settings.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <span class="logo-text">EMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-user">
+            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="user-info">
+                <h4 id="userName">Admin User</h4>
+                <span class="user-role">Administrator</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item has-submenu">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-users-cog"></i><span>User Management</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="users.html">All Users</a></li>
+                        <li><a href="add-user.html">Add User</a></li>
+                        <li><a href="roles-permissions.html">Roles & Permissions</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item has-submenu">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-building"></i><span>Organization</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="designations.html">Designations</a></li>
+                        <li><a href="locations.html">Locations</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item has-submenu open">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-cog"></i><span>System Settings</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li class="active"><a href="general-settings.html">General Settings</a></li>
+                        <li><a href="email-settings.html">Email Settings</a></li>
+                        <li><a href="leave-settings.html">Leave Settings</a></li>
+                        <li><a href="payroll-settings.html">Payroll Settings</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="audit-logs.html">
+                        <i class="fas fa-history"></i><span>Audit Logs</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="system-reports.html">
+                        <i class="fas fa-chart-bar"></i><span>System Reports</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="backup-restore.html">
+                        <i class="fas fa-database"></i><span>Backup & Restore</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">General Settings</h1>
+            </div>
+            <div class="navbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search settings...">
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="icon-btn notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count">5</span>
+                    </button>
+                    <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifications</h3>
+                            <a href="#" class="mark-read">Mark all as read</a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="../common/notifications.html">View all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <div class="user-avatar-small">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <span class="user-name-nav" id="userNameNav">Admin User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                        <div class="profile-dropdown-header">
+                            <div class="user-avatar-large"><i class="fas fa-user-circle"></i></div>
+                            <div class="user-info-dropdown">
+                                <h4 id="userNameDropdown">Admin User</h4>
+                                <p id="userEmailDropdown">admin@company.com</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content-wrapper">
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>General Settings</span>
+            </nav>
+
+            <!-- Alert -->
+            <div class="alert alert-success" id="settingsAlert" style="display:none;">
+                <i class="fas fa-check-circle"></i>
+                <span id="alertMessage"></span>
+                <button class="alert-close" onclick="closeAlert()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Settings Layout -->
+            <div class="settings-layout">
+
+                <!-- Settings Sidebar Nav -->
+                <div class="settings-sidenav">
+                    <div class="settings-sidenav-header">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </div>
+                    <ul class="settings-nav-list">
+                        <li class="settings-nav-item active" onclick="showSection('company')" data-section="company">
+                            <i class="fas fa-building"></i>
+                            <span>Company Info</span>
+                        </li>
+                        <li class="settings-nav-item" onclick="showSection('localization')" data-section="localization">
+                            <i class="fas fa-globe"></i>
+                            <span>Localization</span>
+                        </li>
+                        <li class="settings-nav-item" onclick="showSection('attendance')" data-section="attendance">
+                            <i class="fas fa-clock"></i>
+                            <span>Attendance</span>
+                        </li>
+                        <li class="settings-nav-item" onclick="showSection('security')" data-section="security">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security</span>
+                        </li>
+                        <li class="settings-nav-item" onclick="showSection('notifications')" data-section="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </li>
+                        <li class="settings-nav-item" onclick="showSection('appearance')" data-section="appearance">
+                            <i class="fas fa-palette"></i>
+                            <span>Appearance</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Settings Main Content -->
+                <div class="settings-main">
+
+                    <!-- ===== COMPANY INFO ===== -->
+                    <div class="settings-section active" id="section-company">
+                        <div class="settings-section-header">
+                            <div class="settings-section-icon company">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div>
+                                <h2>Company Information</h2>
+                                <p>Update your organisation's basic details and branding.</p>
+                            </div>
+                        </div>
+
+                        <div class="card settings-card">
+                            <div class="card-body">
+
+                                <!-- Logo Upload -->
+                                <div class="settings-logo-row">
+                                    <div class="logo-preview-circle" id="logoPreview">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <div class="logo-upload-info">
+                                        <h4>Company Logo</h4>
+                                        <p>PNG, JPG up to 2 MB. Recommended 200×200 px.</p>
+                                        <div class="logo-upload-btns">
+                                            <input type="file" id="logoFile" accept="image/*"
+                                                   style="display:none;" onchange="previewLogo(event)">
+                                            <button class="btn btn-secondary btn-sm"
+                                                    onclick="document.getElementById('logoFile').click()">
+                                                <i class="fas fa-upload"></i> Upload
+                                            </button>
+                                            <button class="btn btn-secondary btn-sm" onclick="removeLogo()">
+                                                <i class="fas fa-trash"></i> Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-divider"></div>
+
+                                <form id="companyForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Company Name <span class="required">*</span>
+                                            </label>
+                                            <input type="text" id="companyName" class="form-control"
+                                                   value="TechCorp Solutions Pvt. Ltd.">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Company Code</label>
+                                            <input type="text" id="companyCode" class="form-control"
+                                                   value="TCPL">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Industry</label>
+                                            <select id="industry" class="form-control">
+                                                <option selected>Information Technology</option>
+                                                <option>Manufacturing</option>
+                                                <option>Finance & Banking</option>
+                                                <option>Healthcare</option>
+                                                <option>Retail</option>
+                                                <option>Education</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Founded Year</label>
+                                            <input type="number" id="foundedYear" class="form-control"
+                                                   value="2010" min="1900" max="2099">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Official Email</label>
+                                            <input type="email" id="companyEmail" class="form-control"
+                                                   value="hr@company.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" id="companyPhone" class="form-control"
+                                                   value="+91 44 4000 0000">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Website</label>
+                                        <input type="url" id="companyWebsite" class="form-control"
+                                               value="https://www.company.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Registered Address</label>
+                                        <textarea id="companyAddress" class="form-control" rows="3">
+123, Tech Park, OMR Road, Sholinganallur, Chennai - 600119, Tamil Nadu, India</textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">GST Number</label>
+                                            <input type="text" id="gstNumber" class="form-control"
+                                                   value="33AABCT1234A1Z5">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">PAN Number</label>
+                                            <input type="text" id="panNumber" class="form-control"
+                                                   value="AABCT1234A">
+                                        </div>
+                                    </div>
+                                    <div class="settings-form-actions">
+                                        <button type="button" class="btn btn-secondary"
+                                                onclick="resetSection('company')">
+                                            <i class="fas fa-undo"></i> Reset
+                                        </button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="saveSection('company')">
+                                            <i class="fas fa-save"></i> Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== LOCALIZATION ===== -->
+                    <div class="settings-section" id="section-localization">
+                        <div class="settings-section-header">
+                            <div class="settings-section-icon localization">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <h2>Localization</h2>
+                                <p>Configure language, timezone, date formats and currency.</p>
+                            </div>
+                        </div>
+                        <div class="card settings-card">
+                            <div class="card-body">
+                                <form id="localizationForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Language</label>
+                                            <select id="language" class="form-control">
+                                                <option value="en" selected>English</option>
+                                                <option value="hi">Hindi</option>
+                                                <option value="ta">Tamil</option>
+                                                <option value="te">Telugu</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Timezone</label>
+                                            <select id="timezone" class="form-control">
+                                                <option value="Asia/Kolkata" selected>
+                                                    (UTC+5:30) Asia/Kolkata
+                                                </option>
+                                                <option value="UTC">UTC</option>
+                                                <option value="America/New_York">
+                                                    (UTC-5:00) America/New_York
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Date Format</label>
+                                            <select id="dateFormat" class="form-control">
+                                                <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                                                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                                <option value="DD-MMM-YYYY">DD-MMM-YYYY</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Time Format</label>
+                                            <select id="timeFormat" class="form-control">
+                                                <option value="12" selected>12-hour (AM/PM)</option>
+                                                <option value="24">24-hour</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Currency</label>
+                                            <select id="currency" class="form-control">
+                                                <option value="INR" selected>₹ Indian Rupee (INR)</option>
+                                                <option value="USD">$ US Dollar (USD)</option>
+                                                <option value="EUR">€ Euro (EUR)</option>
+                                                <option value="GBP">£ British Pound (GBP)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Number Format</label>
+                                            <select id="numberFormat" class="form-control">
+                                                <option value="en-IN" selected>
+                                                    Indian (1,00,000)
+                                                </option>
+                                                <option value="en-US">US (100,000)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Week Starts On</label>
+                                            <select id="weekStart" class="form-control">
+                                                <option value="monday" selected>Monday</option>
+                                                <option value="sunday">Sunday</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Financial Year Start</label>
+                                            <select id="fyStart" class="form-control">
+                                                <option value="april" selected>April</option>
+                                                <option value="january">January</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="settings-form-actions">
+                                        <button type="button" class="btn btn-secondary"
+                                                onclick="resetSection('localization')">
+                                            <i class="fas fa-undo"></i> Reset
+                                        </button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="saveSection('localization')">
+                                            <i class="fas fa-save"></i> Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== ATTENDANCE ===== -->
+                    <div class="settings-section" id="section-attendance">
+                        <div class="settings-section-header">
+                            <div class="settings-section-icon attendance">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h2>Attendance Settings</h2>
+                                <p>Define working hours, shifts and late-mark rules.</p>
+                            </div>
+                        </div>
+                        <div class="card settings-card">
+                            <div class="card-body">
+                                <form id="attendanceForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Office Start Time</label>
+                                            <input type="time" id="officeStart" class="form-control"
+                                                   value="09:00">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Office End Time</label>
+                                            <input type="time" id="officeEnd" class="form-control"
+                                                   value="18:00">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Grace Period (minutes)
+                                            </label>
+                                            <input type="number" id="gracePeriod" class="form-control"
+                                                   value="15" min="0" max="60">
+                                            <small class="form-help">
+                                                Allowed late arrival without penalty
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Minimum Working Hours
+                                            </label>
+                                            <input type="number" id="minHours" class="form-control"
+                                                   value="8" min="1" max="12" step="0.5">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Working Days</label>
+                                            <div class="weekday-selector">
+                                                <label class="weekday-chip active">
+                                                    <input type="checkbox" value="mon" checked> Mon
+                                                </label>
+                                                <label class="weekday-chip active">
+                                                    <input type="checkbox" value="tue" checked> Tue
+                                                </label>
+                                                <label class="weekday-chip active">
+                                                    <input type="checkbox" value="wed" checked> Wed
+                                                </label>
+                                                <label class="weekday-chip active">
+                                                    <input type="checkbox" value="thu" checked> Thu
+                                                </label>
+                                                <label class="weekday-chip active">
+                                                    <input type="checkbox" value="fri" checked> Fri
+                                                </label>
+                                                <label class="weekday-chip">
+                                                    <input type="checkbox" value="sat"> Sat
+                                                </label>
+                                                <label class="weekday-chip">
+                                                    <input type="checkbox" value="sun"> Sun
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Half-day Threshold (hours)
+                                            </label>
+                                            <input type="number" id="halfDayHours" class="form-control"
+                                                   value="4" min="1" max="8" step="0.5">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Overtime Threshold (hours/day)
+                                            </label>
+                                            <input type="number" id="overtimeHours" class="form-control"
+                                                   value="9" min="8" max="12" step="0.5">
+                                        </div>
+                                    </div>
+
+                                    <!-- Toggle Settings -->
+                                    <div class="toggle-settings-list">
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Auto Mark Absent</h4>
+                                                <p>
+                                                    Automatically mark employees absent if not checked in
+                                                </p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="autoAbsent" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Allow Manual Override</h4>
+                                                <p>HR can manually edit attendance records</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="manualOverride" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Late Arrival Notification</h4>
+                                                <p>Notify manager when employee is late</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="lateNotify">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="settings-form-actions">
+                                        <button type="button" class="btn btn-secondary"
+                                                onclick="resetSection('attendance')">
+                                            <i class="fas fa-undo"></i> Reset
+                                        </button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="saveSection('attendance')">
+                                            <i class="fas fa-save"></i> Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== SECURITY ===== -->
+                    <div class="settings-section" id="section-security">
+                        <div class="settings-section-header">
+                            <div class="settings-section-icon security">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h2>Security Settings</h2>
+                                <p>Password policies, session management and access control.</p>
+                            </div>
+                        </div>
+                        <div class="card settings-card">
+                            <div class="card-body">
+                                <form id="securityForm">
+                                    <h4 class="settings-sub-heading">Password Policy</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Minimum Password Length</label>
+                                            <input type="number" id="minPassLength" class="form-control"
+                                                   value="8" min="6" max="32">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Password Expiry (days)
+                                            </label>
+                                            <input type="number" id="passExpiry" class="form-control"
+                                                   value="90" min="0">
+                                            <small class="form-help">Set 0 to never expire</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="toggle-settings-list">
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Require Uppercase Letter</h4>
+                                                <p>Password must contain at least one uppercase letter</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="requireUpper" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Require Numbers</h4>
+                                                <p>Password must contain at least one number</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="requireNumber" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Require Special Characters</h4>
+                                                <p>Password must contain !@#$%^&* etc.</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="requireSpecial">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="settings-divider"></div>
+                                    <h4 class="settings-sub-heading">Session & Login</h4>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                Session Timeout (minutes)
+                                            </label>
+                                            <input type="number" id="sessionTimeout" class="form-control"
+                                                   value="30" min="5" max="480">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Max Login Attempts</label>
+                                            <input type="number" id="maxLoginAttempts" class="form-control"
+                                                   value="5" min="3" max="10">
+                                        </div>
+                                    </div>
+
+                                    <div class="toggle-settings-list">
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Two-Factor Authentication</h4>
+                                                <p>Require 2FA for all admin accounts</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="twoFactor">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Account Lockout</h4>
+                                                <p>Lock account after max failed login attempts</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="accountLockout" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-setting-item">
+                                            <div class="toggle-setting-info">
+                                                <h4>Single Session</h4>
+                                                <p>Allow only one active session per user</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="singleSession">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="settings-form-actions">
+                                        <button type="button" class="btn btn-secondary"
+                                                onclick="resetSection('security')">
+                                            <i class="fas fa-undo"></i> Reset
+                                        </button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="saveSection('security')">
+                                            <i class="fas fa-save"></i> Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== NOTIFICATIONS ===== -->
+                    <div class="settings-section" id="section-notifications">
+                        <div class="settings-section-header">
+                            <div class="settings-section-icon notifications">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div>
+                                <h2>Notification Settings</h2>
+                                <p>Control which system events trigger notifications.</p>
+                            </div>
+                        </div>
+                        <div class="card settings-card">
+                            <div class="card-body">
+                                <h4 class="settings-sub-heading">Email Notifications</h4>
+                                <div class="toggle-settings-list">
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>Leave Request Submitted</h4>
+                                            <p>Notify HR when a leave request is submitted</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>Leave Request Approved/Rejected</h4>
+                                            <p>Notify employee of leave decision</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>Payslip Generated</h4>
+                                            <p>Email payslip to employee when generated</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>New Employee Onboarded</h4>
+                                            <p>Notify team on new employee joining</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>Birthday Reminders</h4>
+                                            <p>Send birthday wishes to employees</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>System Backup Alerts</h4>
+                                            <p>Alert admin on backup success/failure</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="settings-form-actions">
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="saveSection('notifications')">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== APPEARANCE ===== -->
+                    <div class="settings-section" id="section-appearance">
+                        <div class="settings-section-header">
+                            <div class="settings-section-icon appearance">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div>
+                                <h2>Appearance</h2>
+                                <p>Customise colours, theme and layout preferences.</p>
+                            </div>
+                        </div>
+                        <div class="card settings-card">
+                            <div class="card-body">
+
+                                <!-- Theme -->
+                                <div class="form-group">
+                                    <label class="form-label">Theme Mode</label>
+                                    <div class="theme-options">
+                                        <label class="theme-option active" id="themeLight"
+                                               onclick="selectTheme('light')">
+                                            <div class="theme-preview light-preview">
+                                                <div class="tp-sidebar"></div>
+                                                <div class="tp-content">
+                                                    <div class="tp-bar"></div>
+                                                    <div class="tp-card"></div>
+                                                </div>
+                                            </div>
+                                            <span>Light</span>
+                                        </label>
+                                        <label class="theme-option" id="themeDark"
+                                               onclick="selectTheme('dark')">
+                                            <div class="theme-preview dark-preview">
+                                                <div class="tp-sidebar"></div>
+                                                <div class="tp-content">
+                                                    <div class="tp-bar"></div>
+                                                    <div class="tp-card"></div>
+                                                </div>
+                                            </div>
+                                            <span>Dark</span>
+                                        </label>
+                                        <label class="theme-option" id="themeSystem"
+                                               onclick="selectTheme('system')">
+                                            <div class="theme-preview system-preview">
+                                                <div class="tp-half light-half"></div>
+                                                <div class="tp-half dark-half"></div>
+                                            </div>
+                                            <span>System</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="settings-divider"></div>
+
+                                <!-- Primary Colour -->
+                                <div class="form-group">
+                                    <label class="form-label">Primary Colour</label>
+                                    <div class="color-swatches">
+                                        <button class="swatch active" data-color="#4F46E5"
+                                                style="background:#4F46E5"
+                                                onclick="selectColor('#4F46E5', this)"></button>
+                                        <button class="swatch" data-color="#10B981"
+                                                style="background:#10B981"
+                                                onclick="selectColor('#10B981', this)"></button>
+                                        <button class="swatch" data-color="#EF4444"
+                                                style="background:#EF4444"
+                                                onclick="selectColor('#EF4444', this)"></button>
+                                        <button class="swatch" data-color="#F59E0B"
+                                                style="background:#F59E0B"
+                                                onclick="selectColor('#F59E0B', this)"></button>
+                                        <button class="swatch" data-color="#8B5CF6"
+                                                style="background:#8B5CF6"
+                                                onclick="selectColor('#8B5CF6', this)"></button>
+                                        <button class="swatch" data-color="#06B6D4"
+                                                style="background:#06B6D4"
+                                                onclick="selectColor('#06B6D4', this)"></button>
+                                        <div class="swatch-custom">
+                                            <input type="color" id="customColor" value="#4F46E5"
+                                                   onchange="selectColor(this.value, null)">
+                                            <span>Custom</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-divider"></div>
+
+                                <!-- Layout -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Sidebar Style</label>
+                                        <select id="sidebarStyle" class="form-control">
+                                            <option value="expanded" selected>Expanded</option>
+                                            <option value="compact">Compact</option>
+                                            <option value="icon-only">Icon Only</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Table Density</label>
+                                        <select id="tableDensity" class="form-control">
+                                            <option value="comfortable" selected>Comfortable</option>
+                                            <option value="compact">Compact</option>
+                                            <option value="spacious">Spacious</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="toggle-settings-list">
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>Animated Transitions</h4>
+                                            <p>Enable smooth page and component transitions</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-setting-item">
+                                        <div class="toggle-setting-info">
+                                            <h4>Show Breadcrumbs</h4>
+                                            <p>Display page navigation breadcrumbs</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="settings-form-actions">
+                                    <button type="button" class="btn btn-secondary"
+                                            onclick="resetSection('appearance')">
+                                        <i class="fas fa-undo"></i> Reset
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="saveSection('appearance')">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- / settings-main -->
+
+            </div>
+            <!-- / settings-layout -->
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/common/sidebar.js"></script>
+<script src="../assets/js/common/navbar.js"></script>
+<script src="../assets/js/admin/general-settings.js"></script>
+
+</body>
+</html>

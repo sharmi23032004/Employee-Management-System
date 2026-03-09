@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Summary - Employee Management System</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/attendance.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <span class="logo-text">EMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-user">
+            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="user-info">
+                <h4 id="userName">John Doe</h4>
+                <span class="user-role">Employee</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="attendance.html">
+                        <i class="fas fa-calendar-check"></i><span>My Attendance</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="leave.html">
+                        <i class="fas fa-calendar-alt"></i><span>Leave</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="payslips.html">
+                        <i class="fas fa-file-invoice-dollar"></i><span>Payslips</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i><span>My Profile</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../common/notifications.html">
+                        <i class="fas fa-bell"></i><span>Notifications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../common/settings.html">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="../common/help.html">
+                        <i class="fas fa-question-circle"></i><span>Help & Support</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Attendance Summary</h1>
+            </div>
+            <div class="navbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="icon-btn notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count">3</span>
+                    </button>
+                    <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifications</h3>
+                            <a href="#" class="mark-read">Mark all as read</a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="../common/notifications.html">View all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-item dropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <div class="user-avatar-small">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <span class="user-name-nav" id="userNameNav">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                        <div class="profile-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info-dropdown">
+                                <h4 id="userNameDropdown">John Doe</h4>
+                                <p id="userEmailDropdown">john.doe@company.com</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="../common/settings.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content-wrapper">
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="attendance.html">Attendance</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Summary</span>
+            </nav>
+
+            <!-- Month Selector -->
+            <div class="month-selector-bar">
+                <button class="month-nav-btn" onclick="changeMonth(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="month-display">
+                    <h2 id="currentMonth">February 2026</h2>
+                </div>
+                <button class="month-nav-btn" onclick="changeMonth(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="attendance-summary-grid">
+                <div class="summary-stat-card present">
+                    <div class="summary-stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="summary-stat-info">
+                        <span class="summary-stat-value" id="presentDays">18</span>
+                        <span class="summary-stat-label">Present Days</span>
+                        <span class="summary-stat-sublabel">Out of 22 working days</span>
+                    </div>
+                </div>
+
+                <div class="summary-stat-card absent">
+                    <div class="summary-stat-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="summary-stat-info">
+                        <span class="summary-stat-value" id="absentDays">2</span>
+                        <span class="summary-stat-label">Absent Days</span>
+                        <span class="summary-stat-sublabel">Without leave</span>
+                    </div>
+                </div>
+
+                <div class="summary-stat-card leave">
+                    <div class="summary-stat-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <div class="summary-stat-info">
+                        <span class="summary-stat-value" id="leaveDays">2</span>
+                        <span class="summary-stat-label">Leave Days</span>
+                        <span class="summary-stat-sublabel">Approved leaves</span>
+                    </div>
+                </div>
+
+                <div class="summary-stat-card percentage">
+                    <div class="summary-stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="summary-stat-info">
+                        <span class="summary-stat-value" id="attendancePercent">81.8%</span>
+                        <span class="summary-stat-label">Attendance Rate</span>
+                        <span class="summary-stat-sublabel">Target: 90%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+
+                <!-- Attendance Trend -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Monthly Trend</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="trendChart" height="250"></canvas>
+                    </div>
+                </div>
+
+                <!-- Status Breakdown -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-pie"></i> Status Breakdown</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="statusChart" height="250"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Working Hours Analysis -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-clock"></i> Working Hours Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="hours-stats-grid">
+                        <div class="hours-stat-item">
+                            <span class="hours-stat-label">Total Hours</span>
+                            <span class="hours-stat-value" id="totalHours">144.5 hrs</span>
+                        </div>
+                        <div class="hours-stat-item">
+                            <span class="hours-stat-label">Average Daily</span>
+                            <span class="hours-stat-value" id="avgHours">8.0 hrs</span>
+                        </div>
+                        <div class="hours-stat-item">
+                            <span class="hours-stat-label">Overtime</span>
+                            <span class="hours-stat-value" id="overtimeHours">8.5 hrs</span>
+                        </div>
+                        <div class="hours-stat-item">
+                            <span class="hours-stat-label">Late Arrivals</span>
+                            <span class="hours-stat-value" id="lateCount">3 days</span>
+                        </div>
+                        <div class="hours-stat-item">
+                            <span class="hours-stat-label">Early Departures</span>
+                            <span class="hours-stat-value" id="earlyCount">1 day</span>
+                        </div>
+                        <div class="hours-stat-item">
+                            <span class="hours-stat-label">On-Time %</span>
+                            <span class="hours-stat-value" id="onTimePercent">83.3%</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <canvas id="hoursChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Records -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> Detailed Records</h3>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="exportSummary()">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table attendance-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Day</th>
+                                    <th>Check In</th>
+                                    <th>Check Out</th>
+                                    <th>Working Hours</th>
+                                    <th>Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="summaryTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Indicators -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-trophy"></i> Performance Indicators</h3>
+                </div>
+                <div class="card-body">
+                    <div class="performance-grid">
+                        <div class="performance-item">
+                            <div class="performance-header">
+                                <h4>Punctuality Score</h4>
+                                <span class="performance-score good">83%</span>
+                            </div>
+                            <div class="performance-bar">
+                                <div class="performance-fill good" style="width: 83%"></div>
+                            </div>
+                            <p class="performance-note">
+                                <i class="fas fa-info-circle"></i>
+                                Based on on-time check-ins
+                            </p>
+                        </div>
+
+                        <div class="performance-item">
+                            <div class="performance-header">
+                                <h4>Attendance Consistency</h4>
+                                <span class="performance-score average">82%</span>
+                            </div>
+                            <div class="performance-bar">
+                                <div class="performance-fill average" style="width: 82%"></div>
+                            </div>
+                            <p class="performance-note">
+                                <i class="fas fa-info-circle"></i>
+                                Present days / Total working days
+                            </p>
+                        </div>
+
+                        <div class="performance-item">
+                            <div class="performance-header">
+                                <h4>Working Hours Compliance</h4>
+                                <span class="performance-score excellent">95%</span>
+                            </div>
+                            <div class="performance-bar">
+                                <div class="performance-fill excellent" style="width: 95%"></div>
+                            </div>
+                            <p class="performance-note">
+                                <i class="fas fa-info-circle"></i>
+                                Meeting minimum 8 hours daily
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/common/sidebar.js"></script>
+<script src="../assets/js/common/navbar.js"></script>
+<script src="../assets/js/employee/attendance-summary.js"></script>
+
+</body>
+</html>

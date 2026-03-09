@@ -1,0 +1,62 @@
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-left {
+        display: none;
+    }
+    
+    .mobile-logo {
+        display: block;
+    }
+    
+    .auth-right {
+        padding: var(--spacing-xl);
+    }
+    
+    .role-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: flex-start;
+    }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+    .auth-body {
+        padding: var(--spacing-sm);
+    }
+    
+    .auth-right {
+        padding: var(--spacing-lg);
+    }
+    
+    .auth-header h2 {
+        font-size: var(--font-2xl);
+    }
+    
+    .brand-title {
+        font-size: var(--font-xl);
+    }
+    
+    .btn {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Large Screens - 1440px and above */
+@media (min-width: 1440px) {
+    .auth-container {
+        max-width: 1400px;
+    }
+}

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Employees - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/employee-management.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">Sarah Johnson</h4>
+                    <span class="user-role">HR Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Employee Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="active"><a href="employees.html">All Employees</a></li>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="employee-directory.html">Directory</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mark-attendance.html">Mark Attendance</a></li>
+                            <li><a href="attendance-records.html">Attendance Records</a></li>
+                            <li><a href="attendance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="leave-requests.html">Leave Requests</a></li>
+                            <li><a href="leave-history.html">Leave History</a></li>
+                            <li><a href="leave-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="process-salary.html">Process Salary</a></li>
+                            <li><a href="salary-slips.html">Salary Slips</a></li>
+                            <li><a href="payroll-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Performance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="performance-reviews.html">Reviews</a></li>
+                            <li><a href="performance-reports.html">Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">All Employees</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search employees...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">8</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">5 pending leave requests</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">Sarah Johnson</h4>
+                                    <p id="userEmailDropdown">sarah.johnson@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Employees Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>All Employees</span>
+                </nav>
+                
+                <!-- Alert Message (Hidden by default) -->
+                <div class="alert alert-success" id="employeesAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="alertMessage"></span>
+                    <button type="button" class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Stats Summary -->
+                <div class="employee-stats-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon total">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value">248</span>
+                            <span class="summary-label">Total Employees</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon active">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value">236</span>
+                            <span class="summary-label">Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon inactive">
+                            <i class="fas fa-user-slash"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value">12</span>
+                            <span class="summary-label">Inactive</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon new">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value">5</span>
+                            <span class="summary-label">New This Month</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filters and Actions -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="employees-toolbar">
+                            <div class="filters-section">
+                                <div class="filter-group">
+                                    <label for="departmentFilter" class="filter-label">Department:</label>
+                                    <select id="departmentFilter" class="filter-select" onchange="filterEmployees()">
+                                        <option value="all">All Departments</option>
+                                        <option value="engineering">Engineering</option>
+                                        <option value="sales">Sales</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="hr">Human Resources</option>
+                                        <option value="finance">Finance</option>
+                                        <option value="operations">Operations</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label for="statusFilter" class="filter-label">Status:</label>
+                                    <select id="statusFilter" class="filter-select" onchange="filterEmployees()">
+                                        <option value="all">All Status</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                        <option value="probation">On Probation</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label for="searchInput" class="filter-label">Search:</label>
+                                    <input 
+                                        type="text" 
+                                        id="searchInput" 
+                                        class="filter-input" 
+                                        placeholder="Name, ID, Email..."
+                                        onkeyup="searchEmployees()"
+                                    >
+                                </div>
+                                
+                                <button class="btn btn-secondary" onclick="resetFilters()">
+                                    <i class="fas fa-redo"></i>
+                                    Reset
+                                </button>
+                            </div>
+                            
+                            <div class="actions-section">
+                                <button class="btn btn-secondary" onclick="exportToExcel()">
+                                    <i class="fas fa-file-excel"></i>
+                                    Export
+                                </button>
+                                <button class="btn btn-primary" onclick="window.location.href='add-employee.html'">
+                                    <i class="fas fa-user-plus"></i>
+                                    Add Employee
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Employees Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-list"></i>
+                            Employee List
+                        </h3>
+                        <div class="view-toggle">
+                            <button class="view-btn active" onclick="switchView('table')" id="tableViewBtn">
+                                <i class="fas fa-table"></i>
+                            </button>
+                            <button class="view-btn" onclick="switchView('grid')" id="gridViewBtn">
+                                <i class="fas fa-th"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Table View -->
+                        <div id="tableView" class="table-responsive">
+                            <table class="table employees-table" id="employeesTable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                                        </th>
+                                        <th>Employee ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Department</th>
+                                        <th>Designation</th>
+                                        <th>Join Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="employeesTableBody">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Grid View -->
+                        <div id="gridView" class="employees-grid" style="display: none;">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <i class="fas fa-users-slash"></i>
+                            <h3>No Employees Found</h3>
+                            <p>Try adjusting your filters or add a new employee.</p>
+                            <button class="btn btn-primary" onclick="window.location.href='add-employee.html'">
+                                <i class="fas fa-user-plus"></i>
+                                Add Employee
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="card-footer">
+                        <div class="pagination-wrapper">
+                            <div class="pagination-info">
+                                Showing <span id="startEntry">1</span> to <span id="endEntry">10</span> of <span id="totalEntries">248</span> entries
+                            </div>
+                            <div class="pagination">
+                                <button class="pagination-btn" id="prevBtn" onclick="changePage('prev')" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                    Previous
+                                </button>
+                                <div class="pagination-numbers" id="paginationNumbers">
+                                    <!-- Page numbers will be populated dynamically -->
+                                </div>
+                                <button class="pagination-btn" id="nextBtn" onclick="changePage('next')">
+                                    Next
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- Employee Details Modal -->
+    <div class="modal" id="employeeDetailsModal">
+        <div class="modal-overlay" onclick="closeEmployeeModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-user"></i>
+                    Employee Details
+                </h3>
+                <button class="modal-close" onclick="closeEmployeeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="employee-details-content">
+                    <div class="employee-header-section">
+                        <div class="employee-avatar-large">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="employee-header-info">
+                            <h2 id="modalEmployeeName">-</h2>
+                            <p id="modalEmployeeDesignation">-</p>
+                            <span class="status-badge active" id="modalEmployeeStatus">Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-info-grid">
+                        <div class="info-section">
+                            <h4>Personal Information</h4>
+                            <div class="info-row">
+                                <span class="info-label">Employee ID:</span>
+                                <span class="info-value" id="modalEmployeeId">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value" id="modalEmployeeEmail">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Phone:</span>
+                                <span class="info-value" id="modalEmployeePhone">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Date of Birth:</span>
+                                <span class="info-value" id="modalEmployeeDOB">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h4>Employment Information</h4>
+                            <div class="info-row">
+                                <span class="info-label">Department:</span>
+                                <span class="info-value" id="modalEmployeeDepartment">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Designation:</span>
+                                <span class="info-value" id="modalEmployeeDesignationFull">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Join Date:</span>
+                                <span class="info-value" id="modalEmployeeJoinDate">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Employment Type:</span>
+                                <span class="info-value" id="modalEmployeeType">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEmployeeModal()">
+                    Close
+                </button>
+                <button class="btn btn-primary" onclick="editEmployee()">
+                    <i class="fas fa-edit"></i>
+                    Edit Employee
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-overlay" onclick="closeDeleteModal()"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Confirm Delete
+                </h3>
+                <button class="modal-close" onclick="closeDeleteModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this employee?</p>
+                <p class="text-muted">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">
+                    Cancel
+                </button>
+                <button class="btn btn-danger" onclick="confirmDelete()">
+                    <i class="fas fa-trash"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/hr/employees.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Apply Leave - Employee Management System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/leave.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="logo-text">EMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="userName">John Doe</h4>
+                    <span class="user-role">Employee</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="my-profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="menu-item has-submenu open">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Leave Management</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="active"><a href="apply-leave.html">Apply Leave</a></li>
+                            <li><a href="my-leaves.html">My Leaves</a></li>
+                            <li><a href="leave-balance.html">Leave Balance</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-clock"></i>
+                            <span>Attendance</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-attendance.html">My Attendance</a></li>
+                            <li><a href="attendance-summary.html">Monthly Summary</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Payroll</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="my-payslips.html">My Payslips</a></li>
+                            <li><a href="salary-details.html">Salary Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="change-password.html">
+                            <i class="fas fa-key"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Apply Leave</h1>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="navbar-item dropdown">
+                        <button class="icon-btn notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge-count">3</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown" id="notificationDropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <a href="#" class="mark-read">Mark all as read</a>
+                            </div>
+                            <div class="notification-list">
+                                <a href="#" class="notification-item unread">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Leave approved for Dec 15-17</p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="../common/notifications.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="navbar-item dropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <div class="user-avatar-small">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <span class="user-name-nav" id="userNameNav">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu profile-dropdown" id="profileDropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="user-info-dropdown">
+                                    <h4 id="userNameDropdown">John Doe</h4>
+                                    <p id="userEmailDropdown">john.doe@company.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="my-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="../common/settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <a href="change-password.html" class="dropdown-item">
+                                <i class="fas fa-key"></i>
+                                Change Password
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Apply Leave Content -->
+            <div class="content-wrapper">
+                
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Apply Leave</span>
+                </nav>
+                
+                <!-- Alert Message (Hidden by default) -->
+                <div class="alert alert-success" id="leaveAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="alertMessage"></span>
+                    <button type="button" class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Main Content Grid -->
+                <div class="leave-application-grid">
+                    
+                    <!-- Left Column - Leave Application Form -->
+                    <div class="leave-form-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-calendar-plus"></i>
+                                    Leave Application Form
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="leaveApplicationForm" novalidate>
+                                    
+                                    <!-- Leave Type -->
+                                    <div class="form-group">
+                                        <label for="leaveType" class="form-label">
+                                            <i class="fas fa-list"></i>
+                                            Leave Type <span class="required">*</span>
+                                        </label>
+                                        <select id="leaveType" name="leaveType" class="form-control" required>
+                                            <option value="">Select Leave Type</option>
+                                            <option value="casual">Casual Leave (5 available)</option>
+                                            <option value="sick">Sick Leave (4 available)</option>
+                                            <option value="privilege">Privilege Leave (3 available)</option>
+                                            <option value="maternity">Maternity Leave</option>
+                                            <option value="paternity">Paternity Leave</option>
+                                            <option value="unpaid">Unpaid Leave</option>
+                                        </select>
+                                        <div class="error-message" id="leaveTypeError"></div>
+                                    </div>
+                                    
+                                    <!-- Leave Duration Type -->
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="fas fa-clock"></i>
+                                            Leave Duration <span class="required">*</span>
+                                        </label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="durationType" value="full" checked onchange="handleDurationChange()">
+                                                <span>Full Day</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="durationType" value="half" onchange="handleDurationChange()">
+                                                <span>Half Day</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="durationType" value="multiple" onchange="handleDurationChange()">
+                                                <span>Multiple Days</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Half Day Session (Hidden by default) -->
+                                    <div class="form-group" id="halfDaySessionGroup" style="display: none;">
+                                        <label for="halfDaySession" class="form-label">
+                                            Session <span class="required">*</span>
+                                        </label>
+                                        <select id="halfDaySession" name="halfDaySession" class="form-control">
+                                            <option value="first">First Half (Morning)</option>
+                                            <option value="second">Second Half (Afternoon)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Date Fields -->
+                                    <div class="form-row" id="dateFieldsRow">
+                                        <div class="form-group" id="singleDateGroup">
+                                            <label for="leaveDate" class="form-label">
+                                                <i class="fas fa-calendar"></i>
+                                                Date <span class="required">*</span>
+                                            </label>
+                                            <input 
+                                                type="date" 
+                                                id="leaveDate" 
+                                                name="leaveDate" 
+                                                class="form-control"
+                                                min=""
+                                            >
+                                            <div class="error-message" id="leaveDateError"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row" id="multipleDateGroup" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="startDate" class="form-label">
+                                                <i class="fas fa-calendar-day"></i>
+                                                Start Date <span class="required">*</span>
+                                            </label>
+                                            <input 
+                                                type="date" 
+                                                id="startDate" 
+                                                name="startDate" 
+                                                class="form-control"
+                                                min=""
+                                            >
+                                            <div class="error-message" id="startDateError"></div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="endDate" class="form-label">
+                                                <i class="fas fa-calendar-check"></i>
+                                                End Date <span class="required">*</span>
+                                            </label>
+                                            <input 
+                                                type="date" 
+                                                id="endDate" 
+                                                name="endDate" 
+                                                class="form-control"
+                                                min=""
+                                            >
+                                            <div class="error-message" id="endDateError"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Total Days Display -->
+                                    <div class="total-days-display" id="totalDaysDisplay" style="display: none;">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Total Days: <strong id="totalDaysValue">0</strong></span>
+                                    </div>
+                                    
+                                    <!-- Reason -->
+                                    <div class="form-group">
+                                        <label for="reason" class="form-label">
+                                            <i class="fas fa-comment-alt"></i>
+                                            Reason for Leave <span class="required">*</span>
+                                        </label>
+                                        <textarea 
+                                            id="reason" 
+                                            name="reason" 
+                                            class="form-control" 
+                                            rows="4"
+                                            placeholder="Please provide detailed reason for your leave..."
+                                            required
+                                        ></textarea>
+                                        <div class="error-message" id="reasonError"></div>
+                                        <div class="char-counter">
+                                            <span id="charCount">0</span> / 500 characters
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Contact During Leave -->
+                                    <div class="form-group">
+                                        <label for="contactNumber" class="form-label">
+                                            <i class="fas fa-phone"></i>
+                                            Contact Number During Leave
+                                        </label>
+                                        <input 
+                                            type="tel" 
+                                            id="contactNumber" 
+                                            name="contactNumber" 
+                                            class="form-control"
+                                            placeholder="+91 9876543210"
+                                        >
+                                        <small class="form-help">Where you can be reached in case of emergency</small>
+                                    </div>
+                                    
+                                    <!-- Attachment -->
+                                    <div class="form-group">
+                                        <label for="attachment" class="form-label">
+                                            <i class="fas fa-paperclip"></i>
+                                            Supporting Document (Optional)
+                                        </label>
+                                        <div class="file-upload-wrapper">
+                                            <input 
+                                                type="file" 
+                                                id="attachment" 
+                                                name="attachment" 
+                                                class="file-input"
+                                                accept=".pdf,.jpg,.jpeg,.png"
+                                            >
+                                            <label for="attachment" class="file-upload-label">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <span id="fileNameDisplay">Click to browse or drag and drop</span>
+                                                <small>Supported: PDF, JPG, PNG (Max 2MB)</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Terms and Conditions -->
+                                    <div class="form-group">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                            <label for="agreeTerms">
+                                                I confirm that the information provided is accurate and I have read the 
+                                                <a href="#" onclick="showLeavePolicy(event)">leave policy</a>
+                                            </label>
+                                        </div>
+                                        <div class="error-message" id="agreeTermsError"></div>
+                                    </div>
+                                    
+                                    <!-- Form Actions -->
+                                    <div class="form-actions">
+                                        <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                            <i class="fas fa-redo"></i>
+                                            Reset Form
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                                            <span class="btn-text">
+                                                <i class="fas fa-paper-plane"></i>
+                                                Submit Application
+                                            </span>
+                                            <span class="btn-loader" style="display: none;">
+                                                <i class="fas fa-spinner fa-spin"></i> Submitting...
+                                            </span>
+                                        </button>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Leave Balance & Guidelines -->
+                    <div class="leave-info-section">
+                        
+                        <!-- Leave Balance Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-pie"></i>
+                                    Leave Balance
+                                </h3>
+                                <a href="leave-balance.html" class="view-all-link">View Details</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="leave-balance-list">
+                                    
+                                    <div class="balance-item casual">
+                                        <div class="balance-header">
+                                            <div class="balance-icon">
+                                                <i class="fas fa-umbrella-beach"></i>
+                                            </div>
+                                            <div class="balance-info">
+                                                <h4>Casual Leave</h4>
+                                                <p>Out of 12 days</p>
+                                            </div>
+                                        </div>
+                                        <div class="balance-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 42%;"></div>
+                                            </div>
+                                            <div class="balance-numbers">
+                                                <span class="available">5 Available</span>
+                                                <span class="used">7 Used</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="balance-item sick">
+                                        <div class="balance-header">
+                                            <div class="balance-icon">
+                                                <i class="fas fa-medkit"></i>
+                                            </div>
+                                            <div class="balance-info">
+                                                <h4>Sick Leave</h4>
+                                                <p>Out of 8 days</p>
+                                            </div>
+                                        </div>
+                                        <div class="balance-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 50%;"></div>
+                                            </div>
+                                            <div class="balance-numbers">
+                                                <span class="available">4 Available</span>
+                                                <span class="used">4 Used</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="balance-item privilege">
+                                        <div class="balance-header">
+                                            <div class="balance-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="balance-info">
+                                                <h4>Privilege Leave</h4>
+                                                <p>Out of 4 days</p>
+                                            </div>
+                                        </div>
+                                        <div class="balance-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 75%;"></div>
+                                            </div>
+                                            <div class="balance-numbers">
+                                                <span class="available">3 Available</span>
+                                                <span class="used">1 Used</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Leave Guidelines Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-info-circle"></i>
+                                    Leave Application Guidelines
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="guidelines-list">
+                                    <div class="guideline-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Apply for leave at least <strong>2 days in advance</strong> for planned leaves</p>
+                                    </div>
+                                    <div class="guideline-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>For sick leave, inform your manager <strong>immediately</strong></p>
+                                    </div>
+                                    <div class="guideline-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Medical certificate required for sick leave <strong>exceeding 2 days</strong></p>
+                                    </div>
+                                    <div class="guideline-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Privilege leave requires <strong>1 week advance</strong> notice</p>
+                                    </div>
+                                    <div class="guideline-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Maximum <strong>3 consecutive casual leaves</strong> without prior approval</p>
+                                    </div>
+                                    <div class="guideline-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Leave balance resets on <strong>January 1st</strong> annually</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Leave Applications Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-history"></i>
+                                    Recent Applications
+                                </h3>
+                                <a href="my-leaves.html" class="view-all-link">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="recent-leaves-list">
+                                    
+                                    <div class="recent-leave-item pending">
+                                        <div class="leave-date">
+                                            <span class="date">15-17</span>
+                                            <span class="month">DEC</span>
+                                        </div>
+                                        <div class="leave-details">
+                                            <h4>Casual Leave</h4>
+                                            <p>3 days</p>
+                                        </div>
+                                        <span class="status-badge pending">Pending</span>
+                                    </div>
+                                    
+                                    <div class="recent-leave-item approved">
+                                        <div class="leave-date">
+                                            <span class="date">07</span>
+                                            <span class="month">FEB</span>
+                                        </div>
+                                        <div class="leave-details">
+                                            <h4>Sick Leave</h4>
+                                            <p>1 day</p>
+                                        </div>
+                                        <span class="status-badge approved">Approved</span>
+                                    </div>
+                                    
+                                    <div class="recent-leave-item rejected">
+                                        <div class="leave-date">
+                                            <span class="date">20-24</span>
+                                            <span class="month">JAN</span>
+                                        </div>
+                                        <div class="leave-details">
+                                            <h4>Privilege Leave</h4>
+                                            <p>5 days</p>
+                                        </div>
+                                        <span class="status-badge rejected">Rejected</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <!-- Leave Policy Modal -->
+    <div class="modal" id="leavePolicyModal">
+        <div class="modal-overlay" onclick="closePolicyModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-file-alt"></i>
+                    Leave Policy
+                </h3>
+                <button class="modal-close" onclick="closePolicyModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-content">
+                    <h4>1. Leave Entitlement</h4>
+                    <p>All full-time employees are entitled to the following annual leave:</p>
+                    <ul>
+                        <li>Casual Leave: 12 days</li>
+                        <li>Sick Leave: 8 days</li>
+                        <li>Privilege Leave: 4 days</li>
+                    </ul>
+                    
+                    <h4>2. Application Process</h4>
+                    <p>Leave applications must be submitted through the EMS system and require manager approval. Emergency leaves should be communicated immediately via phone or email.</p>
+                    
+                    <h4>3. Notice Period</h4>
+                    <ul>
+                        <li>Casual Leave: Minimum 2 days advance notice</li>
+                        <li>Sick Leave: Immediate notification required</li>
+                        <li>Privilege Leave: Minimum 1 week advance notice</li>
+                    </ul>
+                    
+                    <h4>4. Documentation</h4>
+                    <p>Medical certificates are mandatory for sick leaves exceeding 2 consecutive days. Supporting documents should be attached to the leave application.</p>
+                    
+                    <h4>5. Leave Balance</h4>
+                    <p>Unused casual and sick leave cannot be carried forward. Privilege leave may be carried forward up to 50% with manager approval.</p>
+                    
+                    <h4>6. Public Holidays</h4>
+                    <p>Public holidays falling during approved leave period will not be counted against leave balance.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closePolicyModal()">
+                    I Understand
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/validation.js"></script>
+    <script src="../assets/js/common/sidebar.js"></script>
+    <script src="../assets/js/common/navbar.js"></script>
+    <script src="../assets/js/employee/leave-application.js"></script>
+    
+</body>
+</html>
